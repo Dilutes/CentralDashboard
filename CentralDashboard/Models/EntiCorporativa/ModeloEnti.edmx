@@ -1,0 +1,191 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BD_ENTI_CORPORATIVAModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="USR_PaginaSitioWeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="App" Type="varchar" MaxLength="100" />
+          <Property Name="Controlador" Type="varchar" MaxLength="100" />
+          <Property Name="Funcion" Type="varchar" MaxLength="100" />
+          <Property Name="Icono" Type="varchar" MaxLength="200" />
+          <Property Name="Nombre" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="USR_PermisoSitioWeb">
+          <Key>
+            <PropertyRef Name="IdPaginaSitioWeb" />
+            <PropertyRef Name="Usuario" />
+          </Key>
+          <Property Name="IdPaginaSitioWeb" Type="int" Nullable="false" />
+          <Property Name="Usuario" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <Association Name="USR_PermisoSitioWeb_SitioWeb">
+          <End Role="USR_PaginaSitioWeb" Type="Self.USR_PaginaSitioWeb" Multiplicity="1" />
+          <End Role="USR_PermisoSitioWeb" Type="Self.USR_PermisoSitioWeb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USR_PaginaSitioWeb">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="USR_PermisoSitioWeb">
+              <PropertyRef Name="IdPaginaSitioWeb" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="RPT_DiarioHospitalizacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="BD_ENTI_CORPORATIVAModelStoreContainer">
+          <EntitySet Name="USR_PaginaSitioWeb" EntityType="Self.USR_PaginaSitioWeb" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USR_PermisoSitioWeb" EntityType="Self.USR_PermisoSitioWeb" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="USR_PermisoSitioWeb_SitioWeb" Association="Self.USR_PermisoSitioWeb_SitioWeb">
+            <End Role="USR_PaginaSitioWeb" EntitySet="USR_PaginaSitioWeb" />
+            <End Role="USR_PermisoSitioWeb" EntitySet="USR_PermisoSitioWeb" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD_ENTI_CORPORATIVAModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="RPT_DiarioHospitalizacion" ReturnType="Collection(BD_ENTI_CORPORATIVAModel.RPT_DiarioHospitalizacion_Result)" />
+          <EntitySet Name="USR_PaginaSitioWeb" EntityType="BD_ENTI_CORPORATIVAModel.USR_PaginaSitioWeb" />
+          <EntitySet Name="USR_PermisoSitioWeb" EntityType="BD_ENTI_CORPORATIVAModel.USR_PermisoSitioWeb" />
+          <AssociationSet Name="USR_PermisoSitioWeb_SitioWeb" Association="BD_ENTI_CORPORATIVAModel.USR_PermisoSitioWeb_SitioWeb">
+            <End Role="USR_PaginaSitioWeb" EntitySet="USR_PaginaSitioWeb" />
+            <End Role="USR_PermisoSitioWeb" EntitySet="USR_PermisoSitioWeb" />
+          </AssociationSet>
+        </EntityContainer>
+        <ComplexType Name="RPT_DiarioHospitalizacion_Result">
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="82" />
+          <Property Type="Int32" Name="Edad" Nullable="true" />
+          <Property Type="String" Name="Rut" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="PAC_PAC_Sexo" Nullable="false" MaxLength="1" />
+          <Property Type="String" Name="Via_Admision" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="Diagnostico_Principal" Nullable="false" MaxLength="276" />
+          <Property Type="String" Name="EDIFICIO" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PISO" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="NOMBRE_SALA" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Cama" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="ServicioIngreso" Nullable="true" MaxLength="40" />
+          <Property Type="DateTime" Name="Fecha_Hospitalizacion" Nullable="false" Precision="23" />
+          <Property Type="String" Name="ESTADO" Nullable="false" MaxLength="9" />
+          <Property Type="String" Name="Destino_Alta" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="Profesional_Egreso" Nullable="false" MaxLength="82" />
+          <Property Type="String" Name="ServicioAlta" Nullable="true" MaxLength="40" />
+          <Property Type="String" Name="IQ" Nullable="false" MaxLength="549" />
+          <Property Type="Int32" Name="diaHospi" Nullable="true" />
+          <Property Type="Int32" Name="MesHospi" Nullable="true" />
+          <Property Type="Int32" Name="AñoHospi" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="USR_PaginaSitioWeb">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="App" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Controlador" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Funcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USR_PermisoSitioWeb" Relationship="BD_ENTI_CORPORATIVAModel.USR_PermisoSitioWeb_SitioWeb" FromRole="USR_PaginaSitioWeb" ToRole="USR_PermisoSitioWeb" />
+          <Property Name="Icono" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Nombre" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="USR_PermisoSitioWeb">
+          <Key>
+            <PropertyRef Name="IdPaginaSitioWeb" />
+            <PropertyRef Name="Usuario" />
+          </Key>
+          <Property Name="IdPaginaSitioWeb" Type="Int32" Nullable="false" />
+          <Property Name="Usuario" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USR_PaginaSitioWeb" Relationship="BD_ENTI_CORPORATIVAModel.USR_PermisoSitioWeb_SitioWeb" FromRole="USR_PermisoSitioWeb" ToRole="USR_PaginaSitioWeb" />
+        </EntityType>
+        <Association Name="USR_PermisoSitioWeb_SitioWeb">
+          <End Type="BD_ENTI_CORPORATIVAModel.USR_PaginaSitioWeb" Role="USR_PaginaSitioWeb" Multiplicity="1" />
+          <End Type="BD_ENTI_CORPORATIVAModel.USR_PermisoSitioWeb" Role="USR_PermisoSitioWeb" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USR_PaginaSitioWeb">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="USR_PermisoSitioWeb">
+              <PropertyRef Name="IdPaginaSitioWeb" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BD_ENTI_CORPORATIVAModelStoreContainer" CdmEntityContainer="Entities" >
+          <FunctionImportMapping FunctionImportName="RPT_DiarioHospitalizacion" FunctionName="BD_ENTI_CORPORATIVAModel.Store.RPT_DiarioHospitalizacion">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_ENTI_CORPORATIVAModel.RPT_DiarioHospitalizacion_Result">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Rut" ColumnName="Rut" />
+                <ScalarProperty Name="PAC_PAC_Sexo" ColumnName="PAC_PAC_Sexo" />
+                <ScalarProperty Name="Via_Admision" ColumnName="Via Admision" />
+                <ScalarProperty Name="Diagnostico_Principal" ColumnName="Diagnostico Principal" />
+                <ScalarProperty Name="EDIFICIO" ColumnName="EDIFICIO" />
+                <ScalarProperty Name="PISO" ColumnName="PISO" />
+                <ScalarProperty Name="NOMBRE_SALA" ColumnName="NOMBRE SALA" />
+                <ScalarProperty Name="Cama" ColumnName="Cama" />
+                <ScalarProperty Name="ServicioIngreso" ColumnName="ServicioIngreso" />
+                <ScalarProperty Name="Fecha_Hospitalizacion" ColumnName="Fecha Hospitalizacion" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="Destino_Alta" ColumnName="Destino Alta" />
+                <ScalarProperty Name="Profesional_Egreso" ColumnName="Profesional Egreso" />
+                <ScalarProperty Name="ServicioAlta" ColumnName="ServicioAlta" />
+                <ScalarProperty Name="IQ" ColumnName="IQ" />
+                <ScalarProperty Name="diaHospi" ColumnName="diaHospi" />
+                <ScalarProperty Name="MesHospi" ColumnName="MesHospi" />
+                <ScalarProperty Name="AñoHospi" ColumnName="AñoHospi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="USR_PaginaSitioWeb">
+            <EntityTypeMapping TypeName="BD_ENTI_CORPORATIVAModel.USR_PaginaSitioWeb">
+              <MappingFragment StoreEntitySet="USR_PaginaSitioWeb">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Icono" ColumnName="Icono" />
+                <ScalarProperty Name="Funcion" ColumnName="Funcion" />
+                <ScalarProperty Name="Controlador" ColumnName="Controlador" />
+                <ScalarProperty Name="App" ColumnName="App" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USR_PermisoSitioWeb">
+            <EntityTypeMapping TypeName="BD_ENTI_CORPORATIVAModel.USR_PermisoSitioWeb">
+              <MappingFragment StoreEntitySet="USR_PermisoSitioWeb">
+                <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+                <ScalarProperty Name="IdPaginaSitioWeb" ColumnName="IdPaginaSitioWeb" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
