@@ -118,5 +118,12 @@ namespace CentralDashboard.Controllers
                 return File(stream, "application/excel", "Hospitalización diaria generado " + DateTime.Now.ToString("yyyyMMddHHmmss", System.Globalization.CultureInfo.InvariantCulture) + ".xlsx");
             }
         }
+
+        [HttpPost]
+        public FileResult RemUrgencia(int mes = 0, int anio = 0)
+        {
+            // Aquí va la lógica del rpt
+            throw new NotImplementedException();
+        }
     }
 }
