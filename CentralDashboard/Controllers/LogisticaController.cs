@@ -20,7 +20,7 @@ namespace CentralDashboard.Controllers
             {
                 var messageBook = excel.Workbook.Worksheets.Add("Hospitalizaciones");
                 var cellsTemp = messageBook.Cells[2, 1];
-                #region cabecera
+                #region cabecera del Reporte
                 
                 int i = 1;
                 cellsTemp = messageBook.Cells[2, i];
