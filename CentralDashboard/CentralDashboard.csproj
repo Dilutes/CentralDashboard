@@ -135,10 +135,29 @@
     <Compile Include="Controllers\AdministracionController.cs" />
     <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogisticaController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
     <Compile Include="Controllers\ReporteController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Abastecimiento\Abastecimiento.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Abastecimiento.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Abastecimiento\Abastecimiento.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Abastecimiento.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Abastecimiento\Abastecimiento.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Abastecimiento.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Abastecimiento\RPT_CEM_CENABAST_Result.cs">
+      <DependentUpon>Abastecimiento.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntiCorporativa\ModeloEnti.Context.cs">
       <AutoGen>True</AutoGen>
@@ -1793,6 +1812,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Models\Abastecimiento\Abastecimiento.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Abastecimiento.edmx</DependentUpon>
+      <LastGenOutput>Abastecimiento.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\Abastecimiento\Abastecimiento.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Abastecimiento.edmx</DependentUpon>
+      <LastGenOutput>Abastecimiento.cs</LastGenOutput>
+    </Content>
     <Content Include="Models\EntiCorporativa\ModeloEnti.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>ModeloEnti.Context.cs</LastGenOutput>
@@ -1986,6 +2015,13 @@
     <Content Include="Models\EntiCorporativa\ModeloEnti.edmx.diagram">
       <DependentUpon>ModeloEnti.edmx</DependentUpon>
     </Content>
+    <EntityDeploy Include="Models\Abastecimiento\Abastecimiento.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Abastecimiento.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\Abastecimiento\Abastecimiento.edmx.diagram">
+      <DependentUpon>Abastecimiento.edmx</DependentUpon>
+    </Content>
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -2022,6 +2058,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Administración\" />
     <Folder Include="Views\App\" />
+    <Folder Include="Views\Logistica\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
