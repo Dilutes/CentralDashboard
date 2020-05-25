@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="BD_ABASTECIMIENTOModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="RPT_CEM_CENABAST" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AA" Type="int" Mode="In" />
+          <Parameter Name="esInsumo" Type="bit" Mode="In" />
+        </Function>
+        <EntityContainer Name="BD_ABASTECIMIENTOModelStoreContainer" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BD_ABASTECIMIENTOModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BD_ABASTECIMIENTOEntities1" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="RPT_CEM_CENABAST" ReturnType="Collection(BD_ABASTECIMIENTOModel.RPT_CEM_CENABAST_Result)">
+            <Parameter Name="AA" Mode="In" Type="Int32" />
+            <Parameter Name="esInsumo" Mode="In" Type="Boolean" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="RPT_CEM_CENABAST_Result">
+          <Property Type="String" Name="CODIGO_CENABAST" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="GLOSA_MEDICAMENTO" Nullable="true" MaxLength="1000" />
+          <Property Type="String" Name="CODIGO_HRA" Nullable="true" MaxLength="30" />
+          <Property Type="Double" Name="Programado_ENE" Nullable="true" />
+          <Property Type="Double" Name="CANT_CENABAST_ENE" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_CENABAST_ENE" Nullable="true" />
+          <Property Type="Double" Name="MONTO_CENABAST_ENE" Nullable="true" />
+          <Property Type="Double" Name="CANT_OTROS_ENE" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_OTROS_ENE" Nullable="true" />
+          <Property Type="Double" Name="MONTO_OTROS_ENE" Nullable="true" />
+          <Property Type="Double" Name="Programado_FEB" Nullable="true" />
+          <Property Type="Double" Name="CANT_CENABAST_FEB" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_CENABAST_FEB" Nullable="true" />
+          <Property Type="Double" Name="MONTO_CENABAST_FEB" Nullable="true" />
+          <Property Type="Double" Name="CANT_OTROS_FEB" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_OTROS_FEB" Nullable="true" />
+          <Property Type="Double" Name="MONTO_OTROS_FEB" Nullable="true" />
+          <Property Type="Double" Name="Programado_MAR" Nullable="true" />
+          <Property Type="Double" Name="CANT_CENABAST_MAR" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_CENABAST_MAR" Nullable="true" />
+          <Property Type="Double" Name="MONTO_CENABAST_MAR" Nullable="true" />
+          <Property Type="Double" Name="CANT_OTROS_MAR" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_OTROS_MAR" Nullable="true" />
+          <Property Type="Double" Name="MONTO_OTROS_MAR" Nullable="true" />
+          <Property Type="Double" Name="Programado_ABR" Nullable="true" />
+          <Property Type="Double" Name="CANT_CENABAST_ABR" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_CENABAST_ABR" Nullable="true" />
+          <Property Type="Double" Name="MONTO_CENABAST_ABR" Nullable="true" />
+          <Property Type="Double" Name="CANT_OTROS_ABR" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_OTROS_ABR" Nullable="true" />
+          <Property Type="Double" Name="MONTO_OTROS_ABR" Nullable="true" />
+          <Property Type="Double" Name="Programado_MAY" Nullable="true" />
+          <Property Type="Double" Name="CANT_CENABAST_MAY" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_CENABAST_MAY" Nullable="true" />
+          <Property Type="Double" Name="MONTO_CENABAST_MAY" Nullable="true" />
+          <Property Type="Double" Name="CANT_OTROS_MAY" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_OTROS_MAY" Nullable="true" />
+          <Property Type="Double" Name="MONTO_OTROS_MAY" Nullable="true" />
+          <Property Type="Double" Name="Programado_JUN" Nullable="true" />
+          <Property Type="Double" Name="CANT_CENABAST_JUN" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_CENABAST_JUN" Nullable="true" />
+          <Property Type="Double" Name="MONTO_CENABAST_JUN" Nullable="true" />
+          <Property Type="Double" Name="CANT_OTROS_JUN" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_OTROS_JUN" Nullable="true" />
+          <Property Type="Double" Name="MONTO_OTROS_JUN" Nullable="true" />
+          <Property Type="Double" Name="Programado_JUL" Nullable="true" />
+          <Property Type="Double" Name="CANT_CENABAST_JUL" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_CENABAST_JUL" Nullable="true" />
+          <Property Type="Double" Name="MONTO_CENABAST_JUL" Nullable="true" />
+          <Property Type="Double" Name="CANT_OTROS_JUL" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_OTROS_JUL" Nullable="true" />
+          <Property Type="Double" Name="MONTO_OTROS_JUL" Nullable="true" />
+          <Property Type="Double" Name="Programado_AGO" Nullable="true" />
+          <Property Type="Double" Name="CANT_CENABAST_AGO" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_CENABAST_AGO" Nullable="true" />
+          <Property Type="Double" Name="MONTO_CENABAST_AGO" Nullable="true" />
+          <Property Type="Double" Name="CANT_OTROS_AGO" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_OTROS_AGO" Nullable="true" />
+          <Property Type="Double" Name="MONTO_OTROS_AGO" Nullable="true" />
+          <Property Type="Double" Name="Programado_SEP" Nullable="true" />
+          <Property Type="Double" Name="CANT_CENABAST_SEP" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_CENABAST_SEP" Nullable="true" />
+          <Property Type="Double" Name="MONTO_CENABAST_SEP" Nullable="true" />
+          <Property Type="Double" Name="CANT_OTROS_SEP" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_OTROS_SEP" Nullable="true" />
+          <Property Type="Double" Name="MONTO_OTROS_SEP" Nullable="true" />
+          <Property Type="Double" Name="Programado_OCT" Nullable="true" />
+          <Property Type="Double" Name="CANT_CENABAST_OCT" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_CENABAST_OCT" Nullable="true" />
+          <Property Type="Double" Name="MONTO_CENABAST_OCT" Nullable="true" />
+          <Property Type="Double" Name="CANT_OTROS_OCT" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_OTROS_OCT" Nullable="true" />
+          <Property Type="Double" Name="MONTO_OTROS_OCT" Nullable="true" />
+          <Property Type="Double" Name="Programado_NOV" Nullable="true" />
+          <Property Type="Double" Name="CANT_CENABAST_NOV" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_CENABAST_NOV" Nullable="true" />
+          <Property Type="Double" Name="MONTO_CENABAST_NOV" Nullable="true" />
+          <Property Type="Double" Name="CANT_OTROS_NOV" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_OTROS_NOV" Nullable="true" />
+          <Property Type="Double" Name="MONTO_OTROS_NOV" Nullable="true" />
+          <Property Type="Double" Name="Programado_DIC" Nullable="true" />
+          <Property Type="Double" Name="CANT_CENABAST_DIC" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_CENABAST_DIC" Nullable="true" />
+          <Property Type="Double" Name="MONTO_CENABAST_DIC" Nullable="true" />
+          <Property Type="Double" Name="CANT_OTROS_DIC" Nullable="true" />
+          <Property Type="Double" Name="PRECIO_OTROS_DIC" Nullable="true" />
+          <Property Type="Double" Name="MONTO_OTROS_DIC" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BD_ABASTECIMIENTOModelStoreContainer" CdmEntityContainer="BD_ABASTECIMIENTOEntities1" >
+          <FunctionImportMapping FunctionImportName="RPT_CEM_CENABAST" FunctionName="BD_ABASTECIMIENTOModel.Store.RPT_CEM_CENABAST">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_ABASTECIMIENTOModel.RPT_CEM_CENABAST_Result">
+                <ScalarProperty Name="CODIGO_CENABAST" ColumnName="CODIGO_CENABAST" />
+                <ScalarProperty Name="GLOSA_MEDICAMENTO" ColumnName="GLOSA_MEDICAMENTO" />
+                <ScalarProperty Name="CODIGO_HRA" ColumnName="CODIGO_HRA" />
+                <ScalarProperty Name="Programado_ENE" ColumnName="Programado ENE" />
+                <ScalarProperty Name="CANT_CENABAST_ENE" ColumnName="CANT CENABAST ENE" />
+                <ScalarProperty Name="PRECIO_CENABAST_ENE" ColumnName="PRECIO CENABAST ENE" />
+                <ScalarProperty Name="MONTO_CENABAST_ENE" ColumnName="MONTO CENABAST ENE" />
+                <ScalarProperty Name="CANT_OTROS_ENE" ColumnName="CANT OTROS ENE" />
+                <ScalarProperty Name="PRECIO_OTROS_ENE" ColumnName="PRECIO OTROS ENE" />
+                <ScalarProperty Name="MONTO_OTROS_ENE" ColumnName="MONTO OTROS ENE" />
+                <ScalarProperty Name="Programado_FEB" ColumnName="Programado FEB" />
+                <ScalarProperty Name="CANT_CENABAST_FEB" ColumnName="CANT CENABAST FEB" />
+                <ScalarProperty Name="PRECIO_CENABAST_FEB" ColumnName="PRECIO CENABAST FEB" />
+                <ScalarProperty Name="MONTO_CENABAST_FEB" ColumnName="MONTO CENABAST FEB" />
+                <ScalarProperty Name="CANT_OTROS_FEB" ColumnName="CANT OTROS FEB" />
+                <ScalarProperty Name="PRECIO_OTROS_FEB" ColumnName="PRECIO OTROS FEB" />
+                <ScalarProperty Name="MONTO_OTROS_FEB" ColumnName="MONTO OTROS FEB" />
+                <ScalarProperty Name="Programado_MAR" ColumnName="Programado MAR" />
+                <ScalarProperty Name="CANT_CENABAST_MAR" ColumnName="CANT CENABAST MAR" />
+                <ScalarProperty Name="PRECIO_CENABAST_MAR" ColumnName="PRECIO CENABAST MAR" />
+                <ScalarProperty Name="MONTO_CENABAST_MAR" ColumnName="MONTO CENABAST MAR" />
+                <ScalarProperty Name="CANT_OTROS_MAR" ColumnName="CANT OTROS MAR" />
+                <ScalarProperty Name="PRECIO_OTROS_MAR" ColumnName="PRECIO OTROS MAR" />
+                <ScalarProperty Name="MONTO_OTROS_MAR" ColumnName="MONTO OTROS MAR" />
+                <ScalarProperty Name="Programado_ABR" ColumnName="Programado ABR" />
+                <ScalarProperty Name="CANT_CENABAST_ABR" ColumnName="CANT CENABAST ABR" />
+                <ScalarProperty Name="PRECIO_CENABAST_ABR" ColumnName="PRECIO CENABAST ABR" />
+                <ScalarProperty Name="MONTO_CENABAST_ABR" ColumnName="MONTO CENABAST ABR" />
+                <ScalarProperty Name="CANT_OTROS_ABR" ColumnName="CANT OTROS ABR" />
+                <ScalarProperty Name="PRECIO_OTROS_ABR" ColumnName="PRECIO OTROS ABR" />
+                <ScalarProperty Name="MONTO_OTROS_ABR" ColumnName="MONTO OTROS ABR" />
+                <ScalarProperty Name="Programado_MAY" ColumnName="Programado MAY" />
+                <ScalarProperty Name="CANT_CENABAST_MAY" ColumnName="CANT CENABAST MAY" />
+                <ScalarProperty Name="PRECIO_CENABAST_MAY" ColumnName="PRECIO CENABAST MAY" />
+                <ScalarProperty Name="MONTO_CENABAST_MAY" ColumnName="MONTO CENABAST MAY" />
+                <ScalarProperty Name="CANT_OTROS_MAY" ColumnName="CANT OTROS MAY" />
+                <ScalarProperty Name="PRECIO_OTROS_MAY" ColumnName="PRECIO OTROS MAY" />
+                <ScalarProperty Name="MONTO_OTROS_MAY" ColumnName="MONTO OTROS MAY" />
+                <ScalarProperty Name="Programado_JUN" ColumnName="Programado JUN" />
+                <ScalarProperty Name="CANT_CENABAST_JUN" ColumnName="CANT CENABAST JUN" />
+                <ScalarProperty Name="PRECIO_CENABAST_JUN" ColumnName="PRECIO CENABAST JUN" />
+                <ScalarProperty Name="MONTO_CENABAST_JUN" ColumnName="MONTO CENABAST JUN" />
+                <ScalarProperty Name="CANT_OTROS_JUN" ColumnName="CANT OTROS JUN" />
+                <ScalarProperty Name="PRECIO_OTROS_JUN" ColumnName="PRECIO OTROS JUN" />
+                <ScalarProperty Name="MONTO_OTROS_JUN" ColumnName="MONTO OTROS JUN" />
+                <ScalarProperty Name="Programado_JUL" ColumnName="Programado JUL" />
+                <ScalarProperty Name="CANT_CENABAST_JUL" ColumnName="CANT CENABAST JUL" />
+                <ScalarProperty Name="PRECIO_CENABAST_JUL" ColumnName="PRECIO CENABAST JUL" />
+                <ScalarProperty Name="MONTO_CENABAST_JUL" ColumnName="MONTO CENABAST JUL" />
+                <ScalarProperty Name="CANT_OTROS_JUL" ColumnName="CANT OTROS JUL" />
+                <ScalarProperty Name="PRECIO_OTROS_JUL" ColumnName="PRECIO OTROS JUL" />
+                <ScalarProperty Name="MONTO_OTROS_JUL" ColumnName="MONTO OTROS JUL" />
+                <ScalarProperty Name="Programado_AGO" ColumnName="Programado AGO" />
+                <ScalarProperty Name="CANT_CENABAST_AGO" ColumnName="CANT CENABAST AGO" />
+                <ScalarProperty Name="PRECIO_CENABAST_AGO" ColumnName="PRECIO CENABAST AGO" />
+                <ScalarProperty Name="MONTO_CENABAST_AGO" ColumnName="MONTO CENABAST AGO" />
+                <ScalarProperty Name="CANT_OTROS_AGO" ColumnName="CANT OTROS AGO" />
+                <ScalarProperty Name="PRECIO_OTROS_AGO" ColumnName="PRECIO OTROS AGO" />
+                <ScalarProperty Name="MONTO_OTROS_AGO" ColumnName="MONTO OTROS AGO" />
+                <ScalarProperty Name="Programado_SEP" ColumnName="Programado SEP" />
+                <ScalarProperty Name="CANT_CENABAST_SEP" ColumnName="CANT CENABAST SEP" />
+                <ScalarProperty Name="PRECIO_CENABAST_SEP" ColumnName="PRECIO CENABAST SEP" />
+                <ScalarProperty Name="MONTO_CENABAST_SEP" ColumnName="MONTO CENABAST SEP" />
+                <ScalarProperty Name="CANT_OTROS_SEP" ColumnName="CANT OTROS SEP" />
+                <ScalarProperty Name="PRECIO_OTROS_SEP" ColumnName="PRECIO OTROS SEP" />
+                <ScalarProperty Name="MONTO_OTROS_SEP" ColumnName="MONTO OTROS SEP" />
+                <ScalarProperty Name="Programado_OCT" ColumnName="Programado OCT" />
+                <ScalarProperty Name="CANT_CENABAST_OCT" ColumnName="CANT CENABAST OCT" />
+                <ScalarProperty Name="PRECIO_CENABAST_OCT" ColumnName="PRECIO CENABAST OCT" />
+                <ScalarProperty Name="MONTO_CENABAST_OCT" ColumnName="MONTO CENABAST OCT" />
+                <ScalarProperty Name="CANT_OTROS_OCT" ColumnName="CANT OTROS OCT" />
+                <ScalarProperty Name="PRECIO_OTROS_OCT" ColumnName="PRECIO OTROS OCT" />
+                <ScalarProperty Name="MONTO_OTROS_OCT" ColumnName="MONTO OTROS OCT" />
+                <ScalarProperty Name="Programado_NOV" ColumnName="Programado NOV" />
+                <ScalarProperty Name="CANT_CENABAST_NOV" ColumnName="CANT CENABAST NOV" />
+                <ScalarProperty Name="PRECIO_CENABAST_NOV" ColumnName="PRECIO CENABAST NOV" />
+                <ScalarProperty Name="MONTO_CENABAST_NOV" ColumnName="MONTO CENABAST NOV" />
+                <ScalarProperty Name="CANT_OTROS_NOV" ColumnName="CANT OTROS NOV" />
+                <ScalarProperty Name="PRECIO_OTROS_NOV" ColumnName="PRECIO OTROS NOV" />
+                <ScalarProperty Name="MONTO_OTROS_NOV" ColumnName="MONTO OTROS NOV" />
+                <ScalarProperty Name="Programado_DIC" ColumnName="Programado DIC" />
+                <ScalarProperty Name="CANT_CENABAST_DIC" ColumnName="CANT CENABAST DIC" />
+                <ScalarProperty Name="PRECIO_CENABAST_DIC" ColumnName="PRECIO CENABAST DIC" />
+                <ScalarProperty Name="MONTO_CENABAST_DIC" ColumnName="MONTO CENABAST DIC" />
+                <ScalarProperty Name="CANT_OTROS_DIC" ColumnName="CANT OTROS DIC" />
+                <ScalarProperty Name="PRECIO_OTROS_DIC" ColumnName="PRECIO OTROS DIC" />
+                <ScalarProperty Name="MONTO_OTROS_DIC" ColumnName="MONTO OTROS DIC" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
