@@ -4,9 +4,152 @@
             <div class="card-body">
                 <h4>Reportes</h4>
                 <form method="post" action="">
-                    <button type="submit" class="btn btn-success btn-block">Descargar Reporte Diario Hospitalización</button>
+                    <div class="form-group row">
+                        <button type="submit" class="form-control btn btn-success btn-block">Descargar Reporte Diario Hospitalización</button>
+                    </div>
                 </form>
+                <div class="form-group row">
+                    <button onclick="reportOption(0)" class="form-control btn btn-success btn-block">Reporte Fuente REM A08</button>
+                </div>
+
+                <div class="form-group row">
+                    <button onclick="reportOption(1)" class="form-control btn btn-success btn-block">REM A08</button>
+                </div>
             </div>
         </div>
     </div>
 </div>
+
+
+@*Modal*@
+<div class="modal fade" id="modalFormulario" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Rellene los campos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="opcionFomrulario" id="idFormAnio" style="display: none;">
+                    Año
+                    <div class="col-md-12">
+                        <select class="form-control" id="formSelectAnio">
+                        </select>
+                    </div>
+                </div>
+                <div class="opcionFomrulario" id="idFormMes" style="display: none;">
+                    Mes
+                    <div class="col-md-12">
+                        <select class="form-control" id="formSelectMes">
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnPrintRPT" onclick="imprimirRPT()" data-valor="">Imprimir</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.onload = function () {
+        $('#modalFormulario').on('hidden.bs.modal', function () {
+            $(this).find("input,textarea").val('').end();
+            $(this).find("select").empty();
+            $(this).find("select").off('change');
+            $("#btnPrintRPT").attr("valor", '');
+            $(this).find("div.opcionFomrulario").css("display", "none");
+        });
+    };
+
+    function reportOption(item) {
+        switch (item) {
+            case 0:
+                $("#idFormAnio").css("display", "block");
+                $("#idFormMes").css("display", "block");
+                $("#btnPrintRPT").data("valor", item);
+                getAnioREM();
+                break;
+            case 1:
+                $("#idFormAnio").css("display", "block");
+                $("#idFormMes").css("display", "block");
+                $("#btnPrintRPT").data("valor", item);
+                getAnioREM();
+                break;
+        }
+        $('#modalFormulario').modal('show');
+    }
+
+    function imprimirRPT() {
+        var tipoRPT = $("#btnPrintRPT").data("valor");
+        switch (tipoRPT) {
+            case 0:
+                getFuenteREMA08($("#formSelectMes option:selected").val(), $("#formSelectAnio option:selected").val());
+                break;
+            case 1:
+                getREMA08($("#formSelectMes option:selected").val(), $("#formSelectAnio option:selected").val());
+                break;
+        }
+    };
+
+    //AJAX Llamados a los RPT
+    function getFuenteREMA08(mes , anio) {
+        var url = "/Administracion/getFuenteREMA08/?mes=" + mes + "&anio=" + anio;
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
+
+    function getREMA08(mes , anio) {
+        var url = "/Administracion/getREMA08/?mes=" + mes + "&anio=" + anio;
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
+
+
+    //AJAX Modal Formulario
+    function getAnioREM() {
+        $.post("/Administracion/getAnioREM/", {
+        }, function (data) {
+            for (let i = 0; i < data.length; i++) {
+                $('#formSelectAnio').append($('<option>', {
+                    value: data[i],
+                    text: data[i]
+                }));
+            }
+        })
+            .done(function () {
+                getMesREM($("#formSelectAnio option:selected").val());
+                $("#formSelectAnio").change(function () {
+                    getMesREM($("#formSelectAnio option:selected").val());
+                });
+            })
+            .fail(function () {
+                console.log("Error: Obtener año REM select.");
+            });
+    }
+
+    function getMesREM(anio) {
+        $.post("/Administracion/getMesREM/", {
+            anio: anio
+        }, function (data) {
+            console.log(data);
+            $("#formSelectMes").empty();
+            for (let j = 0; j < data.length; j++) {
+                $('#formSelectMes').append($('<option>', {
+                    value: data[j].Item2,
+                    text: data[j].Item1
+                }));
+            }
+        })
+            .done(function () {
+                
+            })
+            .fail(function () {
+                console.log("Error: Obtener mes REM select.");
+            });
+    }
+</script>

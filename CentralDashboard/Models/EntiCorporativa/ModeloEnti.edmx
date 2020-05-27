@@ -36,6 +36,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Function Name="REM_DatosBase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mes" Type="int" Mode="In" />
+          <Parameter Name="anio" Type="int" Mode="In" />
+        </Function>
+        <Function Name="REM_GetAños" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="REM_GetMeses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="anio" Type="int" Mode="In" />
+        </Function>
+        <Function Name="REM_SeccionA" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mes" Type="int" Mode="In" />
+          <Parameter Name="anio" Type="int" Mode="In" />
+        </Function>
+        <Function Name="REM_SeccionB" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mes" Type="int" Mode="In" />
+          <Parameter Name="anio" Type="int" Mode="In" />
+        </Function>
+        <Function Name="REM_SeccionD" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mes" Type="int" Mode="In" />
+          <Parameter Name="anio" Type="int" Mode="In" />
+        </Function>
+        <Function Name="REM_SeccionF" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mes" Type="int" Mode="In" />
+          <Parameter Name="anio" Type="int" Mode="In" />
+        </Function>
         <Function Name="RPT_DiarioHospitalizacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="BD_ENTI_CORPORATIVAModelStoreContainer">
           <EntitySet Name="USR_PaginaSitioWeb" EntityType="Self.USR_PaginaSitioWeb" Schema="dbo" store:Type="Tables" />
@@ -57,6 +81,30 @@
             <End Role="USR_PaginaSitioWeb" EntitySet="USR_PaginaSitioWeb" />
             <End Role="USR_PermisoSitioWeb" EntitySet="USR_PermisoSitioWeb" />
           </AssociationSet>
+          <FunctionImport Name="REM_DatosBase" ReturnType="Collection(BD_ENTI_CORPORATIVAModel.REM_DatosBase_Result)">
+            <Parameter Name="mes" Mode="In" Type="Int32" />
+            <Parameter Name="anio" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="REM_GetAños" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="REM_GetMeses" ReturnType="Collection(Int32)">
+          <Parameter Name="anio" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="REM_SeccionA" ReturnType="Collection(BD_ENTI_CORPORATIVAModel.REM_SeccionA_Result)">
+            <Parameter Name="mes" Mode="In" Type="Int32" />
+            <Parameter Name="anio" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="REM_SeccionB" ReturnType="Collection(BD_ENTI_CORPORATIVAModel.REM_SeccionB_Result)">
+            <Parameter Name="mes" Mode="In" Type="Int32" />
+            <Parameter Name="anio" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="REM_SeccionD" ReturnType="Collection(BD_ENTI_CORPORATIVAModel.REM_SeccionD_Result)">
+            <Parameter Name="mes" Mode="In" Type="Int32" />
+            <Parameter Name="anio" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="REM_SeccionF" ReturnType="Collection(BD_ENTI_CORPORATIVAModel.REM_SeccionF_Result)">
+            <Parameter Name="mes" Mode="In" Type="Int32" />
+            <Parameter Name="anio" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="RPT_DiarioHospitalizacion_Result">
           <Property Type="String" Name="Nombre" Nullable="false" MaxLength="82" />
@@ -113,6 +161,203 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="REM_DatosBase_Result">
+          <Property Type="String" Name="N_DAU" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Fecha_y_Hora_de_Admisón" Nullable="true" MaxLength="61" />
+          <Property Type="String" Name="Fecha_y_Hora_de_Alta_Médica" Nullable="false" MaxLength="61" />
+          <Property Type="String" Name="Demanda" Nullable="false" MaxLength="7" />
+          <Property Type="String" Name="Atención_Completa" Nullable="false" MaxLength="17" />
+          <Property Type="String" Name="Sexo" Nullable="false" MaxLength="6" />
+          <Property Type="String" Name="Grupo_etario" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Beneficiario" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="Derivación" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Tipo_de_atención" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Categorización" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Indicación_de_Hospitalización" Nullable="false" MaxLength="20" />
+          <Property Type="String" Name="Tiempo_de_espera_de_cama" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Tiempo_de_espera_Hosp__Domiciliaria" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Destino_del_Paciente" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Fallecimiento" Nullable="false" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="REM_SeccionA_Result">
+          <Property Type="String" Name="TIPO_DE_ATENCIÓN" Nullable="false" MaxLength="100" />
+          <Property Type="Int32" Name="TOTAL_Ambos_Sexos" Nullable="true" />
+          <Property Type="Int32" Name="TOTAL_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="TOTAL_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C0___4_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C0___4_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C5___9_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C5___9_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C10___14_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C10___14_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C15___19_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C15___19_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C20___24_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C20___24_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C25___29_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C25___29_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C30___34_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C30___34_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C35___39_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C35___39_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C40___44_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C40___44_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C45___49_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C45___49_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C50___54_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C50___54_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C55___59_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C55___59_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C60___64_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C60___64_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C65___69_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C65___69_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C70___74_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C70___74_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C75___79_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C75___79_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C80_y_mas_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C80_y_mas_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="Beneficiarios" Nullable="true" />
+          <Property Type="Int32" Name="SAPU__SAR___SUR" Nullable="true" />
+          <Property Type="Int32" Name="Hospital_Baja_Complejidad" Nullable="true" />
+          <Property Type="Int32" Name="Hospital_Mediana_Alta_Complejidad" Nullable="true" />
+          <Property Type="Int32" Name="Otros_Establecimientos_de_la__Red" Nullable="true" />
+          <Property Type="Int32" Name="Establecimientos_de_otra_Red" Nullable="true" />
+          <Property Type="Int32" Name="Demanda_de_Urgencia" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="REM_SeccionB_Result">
+          <Property Type="String" Name="CATEGORÍAS" Nullable="false" MaxLength="20" />
+          <Property Type="Int32" Name="TOTAL_Ambos_Sexos" Nullable="true" />
+          <Property Type="Int32" Name="TOTAL_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="TOTAL_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C0___4_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C0___4_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C5___9_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C5___9_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C10___14_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C10___14_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C15___19_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C15___19_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C20___24_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C20___24_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C25___29_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C25___29_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C30___34_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C30___34_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C35___39_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C35___39_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C40___44_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C40___44_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C45___49_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C45___49_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C50___54_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C50___54_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C55___59_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C55___59_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C60___64_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C60___64_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C65___69_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C65___69_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C70___74_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C70___74_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C75___79_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C75___79_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C80_y_mas_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C80_y_mas_Mujeres" Nullable="true" />
+          <Property Type="String" Name="Discrecional" Nullable="false" MaxLength="1" />
+          <Property Type="Int32" Name="Estructurado__ESI_" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="REM_GetAños_Result">
+          <Property Type="Int32" Name="Año_REM" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="REM_GetMeses_Result">
+          <Property Type="Int32" Name="Mes_REM" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="REM_SeccionD_Result" >
+          <Property Type="String" Name="TIPO_PACIENTE" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="TOTAL_Ambos_Sexos" Nullable="true" />
+          <Property Type="Int32" Name="TOTAL_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="TOTAL_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C0___4_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C0___4_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C5___9_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C5___9_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C10___14_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C10___14_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C15___19_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C15___19_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C20___24_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C20___24_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C25___29_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C25___29_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C30___34_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C30___34_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C35___39_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C35___39_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C40___44_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C40___44_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C45___49_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C45___49_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C50___54_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C50___54_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C55___59_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C55___59_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C60___64_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C60___64_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C65___69_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C65___69_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C70___74_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C70___74_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C75___79_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C75___79_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C80_y_mas_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C80_y_mas_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="Beneficiarios" Nullable="true" />
+          <Property Type="Int32" Name="Hospitalización_Domiciliaria" Nullable="true" />
+          <Property Type="Int32" Name="orden" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="REM_SeccionF_Result" >
+          <Property Type="String" Name="TIPO_DE_PACIENTES" Nullable="true" MaxLength="100" />
+          <Property Type="Int32" Name="TOTAL_Ambos_Sexos" Nullable="true" />
+          <Property Type="Int32" Name="TOTAL_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C0___4_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C0___4_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C5___9_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C5___9_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C10___14_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C10___14_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C15___19_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C15___19_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C20___24_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C20___24_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C25___29_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C25___29_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C30___34_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C30___34_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C35___39_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C35___39_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C40___44_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C40___44_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C45___49_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C45___49_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C50___54_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C50___54_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C55___59_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C55___59_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C60___64_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C60___64_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C65___69_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C65___69_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C70___74_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C70___74_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C75___79_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C75___79_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="C80_y_mas_Hombres" Nullable="true" />
+          <Property Type="Int32" Name="C80_y_mas_Mujeres" Nullable="true" />
+          <Property Type="Int32" Name="Beneficiarios" Nullable="true" />
+          <Property Type="Int32" Name="TOTAL_Hombres" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -165,6 +410,221 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="REM_DatosBase" FunctionName="BD_ENTI_CORPORATIVAModel.Store.REM_DatosBase">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_ENTI_CORPORATIVAModel.REM_DatosBase_Result">
+                <ScalarProperty Name="N_DAU" ColumnName="N DAU" />
+                <ScalarProperty Name="Fecha_y_Hora_de_Admisón" ColumnName="Fecha y Hora de Admisón" />
+                <ScalarProperty Name="Fecha_y_Hora_de_Alta_Médica" ColumnName="Fecha y Hora de Alta Médica" />
+                <ScalarProperty Name="Demanda" ColumnName="Demanda" />
+                <ScalarProperty Name="Atención_Completa" ColumnName="Atención Completa" />
+                <ScalarProperty Name="Sexo" ColumnName="Sexo" />
+                <ScalarProperty Name="Grupo_etario" ColumnName="Grupo etario" />
+                <ScalarProperty Name="Beneficiario" ColumnName="Beneficiario" />
+                <ScalarProperty Name="Derivación" ColumnName="Derivación" />
+                <ScalarProperty Name="Tipo_de_atención" ColumnName="Tipo de atención" />
+                <ScalarProperty Name="Categorización" ColumnName="Categorización" />
+                <ScalarProperty Name="Indicación_de_Hospitalización" ColumnName="Indicación de Hospitalización" />
+                <ScalarProperty Name="Tiempo_de_espera_de_cama" ColumnName="Tiempo de espera de cama" />
+                <ScalarProperty Name="Tiempo_de_espera_Hosp__Domiciliaria" ColumnName="Tiempo de espera Hosp. Domiciliaria" />
+                <ScalarProperty Name="Destino_del_Paciente" ColumnName="Destino del Paciente" />
+                <ScalarProperty Name="Fallecimiento" ColumnName="Fallecimiento" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="REM_GetAños" FunctionName="BD_ENTI_CORPORATIVAModel.Store.REM_GetAños" >
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="REM_GetMeses" FunctionName="BD_ENTI_CORPORATIVAModel.Store.REM_GetMeses" >
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="REM_SeccionA" FunctionName="BD_ENTI_CORPORATIVAModel.Store.REM_SeccionA">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_ENTI_CORPORATIVAModel.REM_SeccionA_Result">
+                <ScalarProperty Name="TIPO_DE_ATENCIÓN" ColumnName="TIPO DE ATENCIÓN" />
+                <ScalarProperty Name="TOTAL_Ambos_Sexos" ColumnName="TOTAL Ambos Sexos" />
+                <ScalarProperty Name="TOTAL_Hombres" ColumnName="TOTAL Hombres" />
+                <ScalarProperty Name="TOTAL_Mujeres" ColumnName="TOTAL Mujeres" />
+                <ScalarProperty Name="C0___4_Hombres" ColumnName="0 - 4 Hombres" />
+                <ScalarProperty Name="C0___4_Mujeres" ColumnName="0 - 4 Mujeres" />
+                <ScalarProperty Name="C5___9_Hombres" ColumnName="5 - 9 Hombres" />
+                <ScalarProperty Name="C5___9_Mujeres" ColumnName="5 - 9 Mujeres" />
+                <ScalarProperty Name="C10___14_Hombres" ColumnName="10 - 14 Hombres" />
+                <ScalarProperty Name="C10___14_Mujeres" ColumnName="10 - 14 Mujeres" />
+                <ScalarProperty Name="C15___19_Hombres" ColumnName="15 - 19 Hombres" />
+                <ScalarProperty Name="C15___19_Mujeres" ColumnName="15 - 19 Mujeres" />
+                <ScalarProperty Name="C20___24_Hombres" ColumnName="20 - 24 Hombres" />
+                <ScalarProperty Name="C20___24_Mujeres" ColumnName="20 - 24 Mujeres" />
+                <ScalarProperty Name="C25___29_Hombres" ColumnName="25 - 29 Hombres" />
+                <ScalarProperty Name="C25___29_Mujeres" ColumnName="25 - 29 Mujeres" />
+                <ScalarProperty Name="C30___34_Hombres" ColumnName="30 - 34 Hombres" />
+                <ScalarProperty Name="C30___34_Mujeres" ColumnName="30 - 34 Mujeres" />
+                <ScalarProperty Name="C35___39_Hombres" ColumnName="35 - 39 Hombres" />
+                <ScalarProperty Name="C35___39_Mujeres" ColumnName="35 - 39 Mujeres" />
+                <ScalarProperty Name="C40___44_Hombres" ColumnName="40 - 44 Hombres" />
+                <ScalarProperty Name="C40___44_Mujeres" ColumnName="40 - 44 Mujeres" />
+                <ScalarProperty Name="C45___49_Hombres" ColumnName="45 - 49 Hombres" />
+                <ScalarProperty Name="C45___49_Mujeres" ColumnName="45 - 49 Mujeres" />
+                <ScalarProperty Name="C50___54_Hombres" ColumnName="50 - 54 Hombres" />
+                <ScalarProperty Name="C50___54_Mujeres" ColumnName="50 - 54 Mujeres" />
+                <ScalarProperty Name="C55___59_Hombres" ColumnName="55 - 59 Hombres" />
+                <ScalarProperty Name="C55___59_Mujeres" ColumnName="55 - 59 Mujeres" />
+                <ScalarProperty Name="C60___64_Hombres" ColumnName="60 - 64 Hombres" />
+                <ScalarProperty Name="C60___64_Mujeres" ColumnName="60 - 64 Mujeres" />
+                <ScalarProperty Name="C65___69_Hombres" ColumnName="65 - 69 Hombres" />
+                <ScalarProperty Name="C65___69_Mujeres" ColumnName="65 - 69 Mujeres" />
+                <ScalarProperty Name="C70___74_Hombres" ColumnName="70 - 74 Hombres" />
+                <ScalarProperty Name="C70___74_Mujeres" ColumnName="70 - 74 Mujeres" />
+                <ScalarProperty Name="C75___79_Hombres" ColumnName="75 - 79 Hombres" />
+                <ScalarProperty Name="C75___79_Mujeres" ColumnName="75 - 79 Mujeres" />
+                <ScalarProperty Name="C80_y_mas_Hombres" ColumnName="80 y mas Hombres" />
+                <ScalarProperty Name="C80_y_mas_Mujeres" ColumnName="80 y mas Mujeres" />
+                <ScalarProperty Name="Beneficiarios" ColumnName="Beneficiarios" />
+                <ScalarProperty Name="SAPU__SAR___SUR" ColumnName="SAPU/ SAR / SUR" />
+                <ScalarProperty Name="Hospital_Baja_Complejidad" ColumnName="Hospital Baja Complejidad" />
+                <ScalarProperty Name="Hospital_Mediana_Alta_Complejidad" ColumnName="Hospital Mediana/Alta Complejidad" />
+                <ScalarProperty Name="Otros_Establecimientos_de_la__Red" ColumnName="Otros Establecimientos de la  Red" />
+                <ScalarProperty Name="Establecimientos_de_otra_Red" ColumnName="Establecimientos de otra Red" />
+                <ScalarProperty Name="Demanda_de_Urgencia" ColumnName="Demanda de Urgencia" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="REM_SeccionB" FunctionName="BD_ENTI_CORPORATIVAModel.Store.REM_SeccionB">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_ENTI_CORPORATIVAModel.REM_SeccionB_Result">
+                <ScalarProperty Name="CATEGORÍAS" ColumnName="CATEGORÍAS" />
+                <ScalarProperty Name="TOTAL_Ambos_Sexos" ColumnName="TOTAL Ambos Sexos" />
+                <ScalarProperty Name="TOTAL_Hombres" ColumnName="TOTAL Hombres" />
+                <ScalarProperty Name="TOTAL_Mujeres" ColumnName="TOTAL Mujeres" />
+                <ScalarProperty Name="C0___4_Hombres" ColumnName="0 - 4 Hombres" />
+                <ScalarProperty Name="C0___4_Mujeres" ColumnName="0 - 4 Mujeres" />
+                <ScalarProperty Name="C5___9_Hombres" ColumnName="5 - 9 Hombres" />
+                <ScalarProperty Name="C5___9_Mujeres" ColumnName="5 - 9 Mujeres" />
+                <ScalarProperty Name="C10___14_Hombres" ColumnName="10 - 14 Hombres" />
+                <ScalarProperty Name="C10___14_Mujeres" ColumnName="10 - 14 Mujeres" />
+                <ScalarProperty Name="C15___19_Hombres" ColumnName="15 - 19 Hombres" />
+                <ScalarProperty Name="C15___19_Mujeres" ColumnName="15 - 19 Mujeres" />
+                <ScalarProperty Name="C20___24_Hombres" ColumnName="20 - 24 Hombres" />
+                <ScalarProperty Name="C20___24_Mujeres" ColumnName="20 - 24 Mujeres" />
+                <ScalarProperty Name="C25___29_Hombres" ColumnName="25 - 29 Hombres" />
+                <ScalarProperty Name="C25___29_Mujeres" ColumnName="25 - 29 Mujeres" />
+                <ScalarProperty Name="C30___34_Hombres" ColumnName="30 - 34 Hombres" />
+                <ScalarProperty Name="C30___34_Mujeres" ColumnName="30 - 34 Mujeres" />
+                <ScalarProperty Name="C35___39_Hombres" ColumnName="35 - 39 Hombres" />
+                <ScalarProperty Name="C35___39_Mujeres" ColumnName="35 - 39 Mujeres" />
+                <ScalarProperty Name="C40___44_Hombres" ColumnName="40 - 44 Hombres" />
+                <ScalarProperty Name="C40___44_Mujeres" ColumnName="40 - 44 Mujeres" />
+                <ScalarProperty Name="C45___49_Hombres" ColumnName="45 - 49 Hombres" />
+                <ScalarProperty Name="C45___49_Mujeres" ColumnName="45 - 49 Mujeres" />
+                <ScalarProperty Name="C50___54_Hombres" ColumnName="50 - 54 Hombres" />
+                <ScalarProperty Name="C50___54_Mujeres" ColumnName="50 - 54 Mujeres" />
+                <ScalarProperty Name="C55___59_Hombres" ColumnName="55 - 59 Hombres" />
+                <ScalarProperty Name="C55___59_Mujeres" ColumnName="55 - 59 Mujeres" />
+                <ScalarProperty Name="C60___64_Hombres" ColumnName="60 - 64 Hombres" />
+                <ScalarProperty Name="C60___64_Mujeres" ColumnName="60 - 64 Mujeres" />
+                <ScalarProperty Name="C65___69_Hombres" ColumnName="65 - 69 Hombres" />
+                <ScalarProperty Name="C65___69_Mujeres" ColumnName="65 - 69 Mujeres" />
+                <ScalarProperty Name="C70___74_Hombres" ColumnName="70 - 74 Hombres" />
+                <ScalarProperty Name="C70___74_Mujeres" ColumnName="70 - 74 Mujeres" />
+                <ScalarProperty Name="C75___79_Hombres" ColumnName="75 - 79 Hombres" />
+                <ScalarProperty Name="C75___79_Mujeres" ColumnName="75 - 79 Mujeres" />
+                <ScalarProperty Name="C80_y_mas_Hombres" ColumnName="80 y mas Hombres" />
+                <ScalarProperty Name="C80_y_mas_Mujeres" ColumnName="80 y mas Mujeres" />
+                <ScalarProperty Name="Discrecional" ColumnName="Discrecional" />
+                <ScalarProperty Name="Estructurado__ESI_" ColumnName="Estructurado (ESI)" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="REM_SeccionD" FunctionName="BD_ENTI_CORPORATIVAModel.Store.REM_SeccionD" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_ENTI_CORPORATIVAModel.REM_SeccionD_Result" >
+                <ScalarProperty Name="TIPO_PACIENTE" ColumnName="TIPO PACIENTE" />
+                <ScalarProperty Name="TOTAL_Ambos_Sexos" ColumnName="TOTAL Ambos Sexos" />
+                <ScalarProperty Name="TOTAL_Hombres" ColumnName="TOTAL Hombres" />
+                <ScalarProperty Name="TOTAL_Mujeres" ColumnName="TOTAL Mujeres" />
+                <ScalarProperty Name="C0___4_Hombres" ColumnName="0 - 4 Hombres" />
+                <ScalarProperty Name="C0___4_Mujeres" ColumnName="0 - 4 Mujeres" />
+                <ScalarProperty Name="C5___9_Hombres" ColumnName="5 - 9 Hombres" />
+                <ScalarProperty Name="C5___9_Mujeres" ColumnName="5 - 9 Mujeres" />
+                <ScalarProperty Name="C10___14_Hombres" ColumnName="10 - 14 Hombres" />
+                <ScalarProperty Name="C10___14_Mujeres" ColumnName="10 - 14 Mujeres" />
+                <ScalarProperty Name="C15___19_Hombres" ColumnName="15 - 19 Hombres" />
+                <ScalarProperty Name="C15___19_Mujeres" ColumnName="15 - 19 Mujeres" />
+                <ScalarProperty Name="C20___24_Hombres" ColumnName="20 - 24 Hombres" />
+                <ScalarProperty Name="C20___24_Mujeres" ColumnName="20 - 24 Mujeres" />
+                <ScalarProperty Name="C25___29_Hombres" ColumnName="25 - 29 Hombres" />
+                <ScalarProperty Name="C25___29_Mujeres" ColumnName="25 - 29 Mujeres" />
+                <ScalarProperty Name="C30___34_Hombres" ColumnName="30 - 34 Hombres" />
+                <ScalarProperty Name="C30___34_Mujeres" ColumnName="30 - 34 Mujeres" />
+                <ScalarProperty Name="C35___39_Hombres" ColumnName="35 - 39 Hombres" />
+                <ScalarProperty Name="C35___39_Mujeres" ColumnName="35 - 39 Mujeres" />
+                <ScalarProperty Name="C40___44_Hombres" ColumnName="40 - 44 Hombres" />
+                <ScalarProperty Name="C40___44_Mujeres" ColumnName="40 - 44 Mujeres" />
+                <ScalarProperty Name="C45___49_Hombres" ColumnName="45 - 49 Hombres" />
+                <ScalarProperty Name="C45___49_Mujeres" ColumnName="45 - 49 Mujeres" />
+                <ScalarProperty Name="C50___54_Hombres" ColumnName="50 - 54 Hombres" />
+                <ScalarProperty Name="C50___54_Mujeres" ColumnName="50 - 54 Mujeres" />
+                <ScalarProperty Name="C55___59_Hombres" ColumnName="55 - 59 Hombres" />
+                <ScalarProperty Name="C55___59_Mujeres" ColumnName="55 - 59 Mujeres" />
+                <ScalarProperty Name="C60___64_Hombres" ColumnName="60 - 64 Hombres" />
+                <ScalarProperty Name="C60___64_Mujeres" ColumnName="60 - 64 Mujeres" />
+                <ScalarProperty Name="C65___69_Hombres" ColumnName="65 - 69 Hombres" />
+                <ScalarProperty Name="C65___69_Mujeres" ColumnName="65 - 69 Mujeres" />
+                <ScalarProperty Name="C70___74_Hombres" ColumnName="70 - 74 Hombres" />
+                <ScalarProperty Name="C70___74_Mujeres" ColumnName="70 - 74 Mujeres" />
+                <ScalarProperty Name="C75___79_Hombres" ColumnName="75 - 79 Hombres" />
+                <ScalarProperty Name="C75___79_Mujeres" ColumnName="75 - 79 Mujeres" />
+                <ScalarProperty Name="C80_y_mas_Hombres" ColumnName="80 y mas Hombres" />
+                <ScalarProperty Name="C80_y_mas_Mujeres" ColumnName="80 y mas Mujeres" />
+                <ScalarProperty Name="Beneficiarios" ColumnName="Beneficiarios" />
+                <ScalarProperty Name="Hospitalización_Domiciliaria" ColumnName="Hospitalización Domiciliaria" />
+                <ScalarProperty Name="orden" ColumnName="orden" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="REM_SeccionF" FunctionName="BD_ENTI_CORPORATIVAModel.Store.REM_SeccionF" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_ENTI_CORPORATIVAModel.REM_SeccionF_Result" >
+                <ScalarProperty Name="TIPO_DE_PACIENTES" ColumnName="TIPO DE PACIENTES" />
+                <ScalarProperty Name="TOTAL_Ambos_Sexos" ColumnName="TOTAL Ambos Sexos" />
+                <ScalarProperty Name="TOTAL_Mujeres" ColumnName="TOTAL Mujeres" />
+                <ScalarProperty Name="C0___4_Hombres" ColumnName="0 - 4 Hombres" />
+                <ScalarProperty Name="C0___4_Mujeres" ColumnName="0 - 4 Mujeres" />
+                <ScalarProperty Name="C5___9_Hombres" ColumnName="5 - 9 Hombres" />
+                <ScalarProperty Name="C5___9_Mujeres" ColumnName="5 - 9 Mujeres" />
+                <ScalarProperty Name="C10___14_Hombres" ColumnName="10 - 14 Hombres" />
+                <ScalarProperty Name="C10___14_Mujeres" ColumnName="10 - 14 Mujeres" />
+                <ScalarProperty Name="C15___19_Hombres" ColumnName="15 - 19 Hombres" />
+                <ScalarProperty Name="C15___19_Mujeres" ColumnName="15 - 19 Mujeres" />
+                <ScalarProperty Name="C20___24_Hombres" ColumnName="20 - 24 Hombres" />
+                <ScalarProperty Name="C20___24_Mujeres" ColumnName="20 - 24 Mujeres" />
+                <ScalarProperty Name="C25___29_Hombres" ColumnName="25 - 29 Hombres" />
+                <ScalarProperty Name="C25___29_Mujeres" ColumnName="25 - 29 Mujeres" />
+                <ScalarProperty Name="C30___34_Hombres" ColumnName="30 - 34 Hombres" />
+                <ScalarProperty Name="C30___34_Mujeres" ColumnName="30 - 34 Mujeres" />
+                <ScalarProperty Name="C35___39_Hombres" ColumnName="35 - 39 Hombres" />
+                <ScalarProperty Name="C35___39_Mujeres" ColumnName="35 - 39 Mujeres" />
+                <ScalarProperty Name="C40___44_Hombres" ColumnName="40 - 44 Hombres" />
+                <ScalarProperty Name="C40___44_Mujeres" ColumnName="40 - 44 Mujeres" />
+                <ScalarProperty Name="C45___49_Hombres" ColumnName="45 - 49 Hombres" />
+                <ScalarProperty Name="C45___49_Mujeres" ColumnName="45 - 49 Mujeres" />
+                <ScalarProperty Name="C50___54_Hombres" ColumnName="50 - 54 Hombres" />
+                <ScalarProperty Name="C50___54_Mujeres" ColumnName="50 - 54 Mujeres" />
+                <ScalarProperty Name="C55___59_Hombres" ColumnName="55 - 59 Hombres" />
+                <ScalarProperty Name="C55___59_Mujeres" ColumnName="55 - 59 Mujeres" />
+                <ScalarProperty Name="C60___64_Hombres" ColumnName="60 - 64 Hombres" />
+                <ScalarProperty Name="C60___64_Mujeres" ColumnName="60 - 64 Mujeres" />
+                <ScalarProperty Name="C65___69_Hombres" ColumnName="65 - 69 Hombres" />
+                <ScalarProperty Name="C65___69_Mujeres" ColumnName="65 - 69 Mujeres" />
+                <ScalarProperty Name="C70___74_Hombres" ColumnName="70 - 74 Hombres" />
+                <ScalarProperty Name="C70___74_Mujeres" ColumnName="70 - 74 Mujeres" />
+                <ScalarProperty Name="C75___79_Hombres" ColumnName="75 - 79 Hombres" />
+                <ScalarProperty Name="C75___79_Mujeres" ColumnName="75 - 79 Mujeres" />
+                <ScalarProperty Name="C80_y_mas_Hombres" ColumnName="80 y mas Hombres" />
+                <ScalarProperty Name="C80_y_mas_Mujeres" ColumnName="80 y mas Mujeres" />
+                <ScalarProperty Name="Beneficiarios" ColumnName="Beneficiarios" />
+                <ScalarProperty Name="TOTAL_Hombres" ColumnName="TOTAL Hombres" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

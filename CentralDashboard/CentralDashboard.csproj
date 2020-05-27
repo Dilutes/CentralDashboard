@@ -155,6 +155,27 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ModeloEnti.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntiCorporativa\REM_DatosBase_Result.cs">
+      <DependentUpon>ModeloEnti.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntiCorporativa\REM_GetAños_Result.cs">
+      <DependentUpon>ModeloEnti.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntiCorporativa\REM_GetMeses_Result.cs">
+      <DependentUpon>ModeloEnti.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntiCorporativa\REM_SeccionA_Result.cs">
+      <DependentUpon>ModeloEnti.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntiCorporativa\REM_SeccionB_Result.cs">
+      <DependentUpon>ModeloEnti.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntiCorporativa\REM_SeccionD_Result.cs">
+      <DependentUpon>ModeloEnti.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntiCorporativa\REM_SeccionF_Result.cs">
+      <DependentUpon>ModeloEnti.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntiCorporativa\RPT_DiarioHospitalizacion_Result.cs">
       <DependentUpon>ModeloEnti.tt</DependentUpon>
     </Compile>
