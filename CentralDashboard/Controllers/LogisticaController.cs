@@ -10,7 +10,7 @@ namespace CentralDashboard.Controllers
 {
     public class LogisticaController : AppController
     {
-        [HttpPost]
+        //[HttpPost]
         public ActionResult CemCenabast(int anio, bool insumo = false)
         {
             var bd = bdBuilder.GetAbastecimiento();

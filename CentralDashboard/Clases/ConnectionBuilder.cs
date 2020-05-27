@@ -23,13 +23,13 @@ namespace CentralDashboard.Clases
             ";MultipleActiveResultSets=True;App=Dashboard\"" };
         private string[] configuracionAbastecimiento =
         {
-            "metadata=res://*/Models.Abastecimiento.Abastecimiento.csdl|res://*/Models.Abastecimiento.Abastecimiento.ssdl|res://*/Models.Abastecimiento.Abastecimiento.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=",
+            "metadata=res://*/Models.Abastecimiento.Abastecimiento.csdl|res://*/Models.Abastecimiento.Abastecimiento.ssdl|res://*/Models.Abastecimiento.Abastecimiento.msl;provider=System.Data.SqlClient;provider connection string=\"data source=",
             "",
             ";initial catalog=BD_ABASTECIMIENTO;user id=",
             "",
             ";password=",
             "",
-            ";MultipleActiveResultSets=True;App=Dashboard\"" };
+            ";MultipleActiveResultSets=True;App=Dashboard;Connect Timeout=60\"" };
 
         public ConnectionBuilder(HttpSessionStateBase session)
         {
@@ -83,12 +83,11 @@ namespace CentralDashboard.Models.EntiCorporativa
 
 namespace CentralDashboard.Models.Abastecimiento
 {
-    public partial class BD_ABASTECIMIENTOEntities1: DbContext
+    public partial class BD_ABASTECIMIENTOEntities1 : DbContext
     {
         public BD_ABASTECIMIENTOEntities1(string conexion)
             : base(conexion)
         {
-
         }
     }
 }

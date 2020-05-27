@@ -15,6 +15,9 @@
                 <div class="form-group row">
                     <button onclick="reportOption(1)" class="form-control btn btn-success btn-block">REM A08</button>
                 </div>
+                <div class="form-group row">
+                    <button onclick="reportOption(2)" class="form-control btn btn-success btn-block">CEM Cenabast</button>
+                </div>
             </div>
         </div>
     </div>
@@ -35,15 +38,25 @@
                 <div class="opcionFomrulario" id="idFormAnio" style="display: none;">
                     Año
                     <div class="col-md-12">
-                        <select class="form-control" id="formSelectAnio">
-                        </select>
+                        <select class="form-control" id="formSelectAnio"></select>
+                    </div>
+                </div>
+                <div class="opcionFomrulario" id="idFormAnioInput" style="display: none;">
+                    Año
+                    <div class="col-md-12">
+                        <input type="number" max="9999" min="1000" id="formInputAnio" class="form-control">
                     </div>
                 </div>
                 <div class="opcionFomrulario" id="idFormMes" style="display: none;">
                     Mes
                     <div class="col-md-12">
-                        <select class="form-control" id="formSelectMes">
-                        </select>
+                        <select class="form-control" id="formSelectMes"></select>
+                    </div>
+                </div>
+                <div class="opcionFomrulario" id="idFormCheckBox1" style="display: none;">
+                    Check
+                    <div class="col-md-12" id="cbList">
+                        
                     </div>
                 </div>
             </div>
@@ -62,6 +75,7 @@
             $(this).find("select").empty();
             $(this).find("select").off('change');
             $("#btnPrintRPT").attr("valor", '');
+            $(this).find("input:checked").prop("checked", false);
             $(this).find("div.opcionFomrulario").css("display", "none");
         });
     };
@@ -80,6 +94,12 @@
                 $("#btnPrintRPT").data("valor", item);
                 getAnioREM();
                 break;
+            case 2:
+                $("#idFormAnioInput").css("display", "block");
+                $("#idFormCheckBox1").css("display", "block");
+                addCheckbox("Insumo", "Insumo", true, "cbList");
+                $("#btnPrintRPT").data("valor", item);
+                break;
         }
         $('#modalFormulario').modal('show');
     }
@@ -93,6 +113,13 @@
             case 1:
                 getREMA08($("#formSelectMes option:selected").val(), $("#formSelectAnio option:selected").val());
                 break;
+            case 2:
+                if ($("#formInputAnio").val() != '') {
+                    getCemCenabast($("#formInputAnio").val(), $("#cbInsumo:checked").val());
+                } else {
+                    alert("Año invalido");
+                }
+                break;
         }
     };
 
@@ -105,6 +132,12 @@
 
     function getREMA08(mes , anio) {
         var url = "/Administracion/getREMA08/?mes=" + mes + "&anio=" + anio;
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
+
+    function getCemCenabast(anio, insumo) {
+        var url = "/Logistica/CemCenabast/?anio=" + anio + "&insumo=" + insumo;
         var win = window.open(url, '_blank');
         win.focus();
     }
@@ -151,5 +184,12 @@
             .fail(function () {
                 console.log("Error: Obtener mes REM select.");
             });
+    }
+
+    function addCheckbox(id, txt, valor, contenedor) {
+        var container = $("#" + contenedor);
+
+        $('<input />', { type: 'checkbox', id: 'cb' + id, value: valor}).appendTo(container);
+        $('<label />', { 'for': 'cb' + id, text: txt, class: 'form-check-label' }).appendTo(container);
     }
 </script>
