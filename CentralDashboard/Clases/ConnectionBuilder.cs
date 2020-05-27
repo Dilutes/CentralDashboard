@@ -13,7 +13,23 @@ namespace CentralDashboard.Clases
         private string usuario;
         private string pass;
         private string servidor;
-        private string[] configuracionEnti = { "metadata=res://*/Models.EntiCorporativa.ModeloEnti.csdl|res://*/Models.EntiCorporativa.ModeloEnti.ssdl|res://*/Models.EntiCorporativa.ModeloEnti.msl;provider=System.Data.SqlClient;provider connection string=\"data source=", "", ";initial catalog=BD_ENTI_CORPORATIVA;user id=", "", ";password=", "", ";MultipleActiveResultSets=True;App=Dashboard\"" };
+        private string[] configuracionEnti = { 
+            "metadata=res://*/Models.EntiCorporativa.ModeloEnti.csdl|res://*/Models.EntiCorporativa.ModeloEnti.ssdl|res://*/Models.EntiCorporativa.ModeloEnti.msl;provider=System.Data.SqlClient;provider connection string=\"data source=",
+            "",
+            ";initial catalog=BD_ENTI_CORPORATIVA;user id=", 
+            "", 
+            ";password=", 
+            "", 
+            ";MultipleActiveResultSets=True;App=Dashboard\"" };
+        private string[] configuracionAbastecimiento =
+        {
+            "metadata=res://*/Models.Abastecimiento.Abastecimiento.csdl|res://*/Models.Abastecimiento.Abastecimiento.ssdl|res://*/Models.Abastecimiento.Abastecimiento.msl;provider=System.Data.SqlClient;provider connection string=&quot;data source=",
+            "",
+            ";initial catalog=BD_ABASTECIMIENTO;user id=",
+            "",
+            ";password=",
+            "",
+            ";MultipleActiveResultSets=True;App=Dashboard\"" };
 
         public ConnectionBuilder(HttpSessionStateBase session)
         {
@@ -46,6 +62,11 @@ namespace CentralDashboard.Clases
         {
             return new Models.EntiCorporativa.Entities(GenerarStringBuilder(configuracionEnti));
         }
+
+        public Models.Abastecimiento.BD_ABASTECIMIENTOEntities1 GetAbastecimiento()
+        {
+            return new Models.Abastecimiento.BD_ABASTECIMIENTOEntities1(GenerarStringBuilder(configuracionAbastecimiento));
+        }
     }
 }
 
@@ -56,6 +77,18 @@ namespace CentralDashboard.Models.EntiCorporativa
         public Entities(string conexion)
             : base(conexion)
         {
+        }
+    }
+}
+
+namespace CentralDashboard.Models.Abastecimiento
+{
+    public partial class BD_ABASTECIMIENTOEntities1: DbContext
+    {
+        public BD_ABASTECIMIENTOEntities1(string conexion)
+            : base(conexion)
+        {
+
         }
     }
 }
