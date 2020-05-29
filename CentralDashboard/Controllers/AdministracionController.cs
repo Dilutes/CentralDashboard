@@ -16,12 +16,23 @@ namespace CentralDashboard.Controllers
         // GET: Administración
         public ActionResult Index()
         {
+            var bd = bdBuilder.GetEntiCorporativa();
+            string idUsuario = GetUsuario();
+            ViewBag.ReporteDiarioHosp = bd.USR_PermisoSitioWeb.Any(x => x.Usuario == idUsuario && x.IdPaginaSitioWeb == 1);
+            ViewBag.ReporteFuentesRemA08 = bd.USR_PermisoSitioWeb.Any(x => x.Usuario == idUsuario && x.IdPaginaSitioWeb == 2);
+            ViewBag.ReporteRemA08 = bd.USR_PermisoSitioWeb.Any(x => x.Usuario == idUsuario && x.IdPaginaSitioWeb == 3);
+            ViewBag.ReporteCemCenabast = bd.USR_PermisoSitioWeb.Any(x => x.Usuario == idUsuario && x.IdPaginaSitioWeb == 4);
             return View();
         }
         [HttpPost]
         public FileResult Index(int isa = 0)
         {
             var bd = bdBuilder.GetEntiCorporativa();
+            string idUsuario = GetUsuario();
+            if (!bd.USR_PermisoSitioWeb.Any(x => x.Usuario == idUsuario && x.IdPaginaSitioWeb == 1))
+            {
+                throw new UnauthorizedAccessException();
+            }
             using (ExcelPackage excel = new ExcelPackage())
             {
                 var rpt = bd.RPT_DiarioHospitalizacion().ToList();
@@ -124,6 +135,11 @@ namespace CentralDashboard.Controllers
 
         public FileResult getFuenteREMA08(int mes, int anio) {
             var bd = bdBuilder.GetEntiCorporativa();
+            string idUsuario = GetUsuario();
+            if (!bd.USR_PermisoSitioWeb.Any(x => x.Usuario == idUsuario && x.IdPaginaSitioWeb == 2))
+            {
+                throw new UnauthorizedAccessException();
+            }
             using (ExcelPackage excel = new ExcelPackage())
             {
                 List<REM_DatosBase_Result> result = bd.REM_DatosBase(mes, anio).ToList();
@@ -192,6 +208,11 @@ namespace CentralDashboard.Controllers
         public FileResult getREMA08(int mes, int anio)
         {
             var bd = bdBuilder.GetEntiCorporativa();
+            string idUsuario = GetUsuario();
+            if (!bd.USR_PermisoSitioWeb.Any(x => x.Usuario == idUsuario && x.IdPaginaSitioWeb == 3))
+            {
+                throw new UnauthorizedAccessException();
+            }
             using (ExcelPackage excel = new ExcelPackage())
             {
                 List<REM_SeccionA_Result> resultA = bd.REM_SeccionA(mes, anio).ToList();

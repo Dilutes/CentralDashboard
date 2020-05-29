@@ -11,7 +11,7 @@ namespace CentralDashboard.Controllers
     {
         [ChildActionOnly]
         // GET: Menu
-        public ActionResult Superior()
+        public ActionResult Superior() 
         {
             return View();
         }

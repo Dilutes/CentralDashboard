@@ -13,6 +13,12 @@ namespace CentralDashboard.Controllers
         //[HttpPost]
         public ActionResult CemCenabast(int anio, bool insumo = false)
         {
+            var bdEnti = bdBuilder.GetEntiCorporativa();
+            string idUsuario = GetUsuario();
+            if (!bdEnti.USR_PermisoSitioWeb.Any(x => x.Usuario == idUsuario && x.IdPaginaSitioWeb == 4))
+            {
+                throw new UnauthorizedAccessException();
+            }
             var bd = bdBuilder.GetAbastecimiento();
             var rows = bd.RPT_CEM_CENABAST(anio, insumo);
 
