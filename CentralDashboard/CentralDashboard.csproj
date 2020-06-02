@@ -134,6 +134,7 @@
     <Compile Include="Clases\ExcelHelper.cs" />
     <Compile Include="Controllers\AdministracionController.cs" />
     <Compile Include="Controllers\AppController.cs" />
+    <Compile Include="Controllers\ComgesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogisticaController.cs" />
     <Compile Include="Controllers\MenuController.cs" />
@@ -193,6 +194,12 @@
       <DependentUpon>ModeloEnti.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntiCorporativa\REM_SeccionF_Result.cs">
+      <DependentUpon>ModeloEnti.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntiCorporativa\RPT_COMGES_UEH_base_Result.cs">
+      <DependentUpon>ModeloEnti.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntiCorporativa\RPT_COMGES_UEH_Result.cs">
       <DependentUpon>ModeloEnti.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EntiCorporativa\RPT_DiarioHospitalizacion_Result.cs">
@@ -2079,6 +2086,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="Views\Administración\" />
     <Folder Include="Views\App\" />
+    <Folder Include="Views\Comges\" />
     <Folder Include="Views\Logistica\" />
   </ItemGroup>
   <ItemGroup>

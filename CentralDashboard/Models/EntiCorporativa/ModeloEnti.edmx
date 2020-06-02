@@ -60,6 +60,14 @@
           <Parameter Name="mes" Type="int" Mode="In" />
           <Parameter Name="anio" Type="int" Mode="In" />
         </Function>
+        <Function Name="RPT_COMGES_UEH" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mes" Type="int" Mode="In" />
+          <Parameter Name="anio" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RPT_COMGES_UEH_base" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mes" Type="int" Mode="In" />
+          <Parameter Name="anio" Type="int" Mode="In" />
+        </Function>
         <Function Name="RPT_DiarioHospitalizacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <EntityContainer Name="BD_ENTI_CORPORATIVAModelStoreContainer">
           <EntitySet Name="USR_PaginaSitioWeb" EntityType="Self.USR_PaginaSitioWeb" Schema="dbo" store:Type="Tables" />
@@ -102,6 +110,14 @@
             <Parameter Name="anio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="REM_SeccionF" ReturnType="Collection(BD_ENTI_CORPORATIVAModel.REM_SeccionF_Result)">
+            <Parameter Name="mes" Mode="In" Type="Int32" />
+            <Parameter Name="anio" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RPT_COMGES_UEH" ReturnType="Collection(BD_ENTI_CORPORATIVAModel.RPT_COMGES_UEH_Result)">
+            <Parameter Name="mes" Mode="In" Type="Int32" />
+            <Parameter Name="anio" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RPT_COMGES_UEH_base" ReturnType="Collection(BD_ENTI_CORPORATIVAModel.RPT_COMGES_UEH_base_Result)">
             <Parameter Name="mes" Mode="In" Type="Int32" />
             <Parameter Name="anio" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -357,6 +373,23 @@
           <Property Type="Int32" Name="C80_y_mas_Mujeres" Nullable="true" />
           <Property Type="Int32" Name="Beneficiarios" Nullable="true" />
           <Property Type="Int32" Name="TOTAL_Hombres" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="RPT_COMGES_UEH_Result">
+          <Property Type="Int32" Name="total_C2" Nullable="true" />
+          <Property Type="Int32" Name="menor_a_30" Nullable="true" />
+          <Property Type="Decimal" Name="Porcentaje" Nullable="true" Precision="26" Scale="12" />
+        </ComplexType>
+        <ComplexType Name="RPT_COMGES_UEH_base_Result">
+          <Property Type="String" Name="DAU" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Mes_Atención" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="82" />
+          <Property Type="String" Name="Rut" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Categorización" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Fecha_y_Hora_categorización" Nullable="true" MaxLength="61" />
+          <Property Type="String" Name="Fecha_y_Hora_de_Primera_Atención_Médica" Nullable="true" MaxLength="61" />
+          <Property Type="Decimal" Name="Tiempo_de_espera__minutos_" Nullable="true" Precision="17" Scale="6" />
+          <Property Type="String" Name="Cumplimiento_tiempo_menor_o_igual_a_30_minutos" Nullable="false" MaxLength="26" />
+          <Property Type="String" Name="Tipo_de_atención" Nullable="false" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -622,6 +655,31 @@
                 <ScalarProperty Name="C80_y_mas_Mujeres" ColumnName="80 y mas Mujeres" />
                 <ScalarProperty Name="Beneficiarios" ColumnName="Beneficiarios" />
                 <ScalarProperty Name="TOTAL_Hombres" ColumnName="TOTAL Hombres" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RPT_COMGES_UEH" FunctionName="BD_ENTI_CORPORATIVAModel.Store.RPT_COMGES_UEH">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_ENTI_CORPORATIVAModel.RPT_COMGES_UEH_Result">
+                <ScalarProperty Name="total_C2" ColumnName="total_C2" />
+                <ScalarProperty Name="menor_a_30" ColumnName="menor a 30" />
+                <ScalarProperty Name="Porcentaje" ColumnName="Porcentaje" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RPT_COMGES_UEH_base" FunctionName="BD_ENTI_CORPORATIVAModel.Store.RPT_COMGES_UEH_base">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_ENTI_CORPORATIVAModel.RPT_COMGES_UEH_base_Result">
+                <ScalarProperty Name="DAU" ColumnName="DAU" />
+                <ScalarProperty Name="Mes_Atención" ColumnName="Mes Atención" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Rut" ColumnName="Rut" />
+                <ScalarProperty Name="Categorización" ColumnName="Categorización" />
+                <ScalarProperty Name="Fecha_y_Hora_categorización" ColumnName="Fecha y Hora categorización" />
+                <ScalarProperty Name="Fecha_y_Hora_de_Primera_Atención_Médica" ColumnName="Fecha y Hora de Primera Atención Médica" />
+                <ScalarProperty Name="Tiempo_de_espera__minutos_" ColumnName="Tiempo de espera (minutos)" />
+                <ScalarProperty Name="Cumplimiento_tiempo_menor_o_igual_a_30_minutos" ColumnName="Cumplimiento tiempo menor o igual a 30 minutos" />
+                <ScalarProperty Name="Tipo_de_atención" ColumnName="Tipo de atención" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
