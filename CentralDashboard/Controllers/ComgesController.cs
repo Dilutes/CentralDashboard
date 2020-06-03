@@ -19,24 +19,28 @@ namespace CentralDashboard.Controllers
         // GET: Comges
         public ActionResult Index()
         {
-            MemoryStream stream = Comges();
+            return View();
+        }
+
+        public void ObtenerReporteComges(int idMes, string mes, int año)
+        {
+            MemoryStream stream = Comges(idMes, mes, año);
             string name = "COMGES_Abril_2020.xlsx";
             Response.Clear();
             Response.AddHeader("content-disposition", "attachment;filename=" + name);
             Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             Response.BinaryWrite(stream.ToArray());
             Response.End();
-            return View();
         }
 
-        public MemoryStream Comges()
+        private MemoryStream Comges(int idMes, string mes, int año)
         {
             var bdEnti = bdBuilder.GetEntiCorporativa();
-            RPT_COMGES_UEH_Result resumen = bdEnti.RPT_COMGES_UEH(4, 2020).FirstOrDefault();
-            List<RPT_COMGES_UEH_base_Result> comges = bdEnti.RPT_COMGES_UEH_base(4, 2020).ToList();
+            RPT_COMGES_UEH_Result resumen = bdEnti.RPT_COMGES_UEH(idMes, año).FirstOrDefault();
+            List<RPT_COMGES_UEH_base_Result> comges = bdEnti.RPT_COMGES_UEH_base(idMes, año).ToList();
             DataTable dt = CabeceraComges(BuildDataTable<RPT_COMGES_UEH_base_Result>(comges));
-            dt.TableName = "Abril";
-            return DataSetToExcelXlsx(resumen, dt, "Abril");
+            dt.TableName = mes;
+            return DataSetToExcelXlsx(resumen, dt, mes);
         }
 
         private DataTable CabeceraComges(DataTable dataTable)

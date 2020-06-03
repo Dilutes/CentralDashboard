@@ -2084,12 +2084,12 @@
     <Content Include="Views\Reporte\Index.cshtml" />
     <Content Include="Views\Menu\IzquierdaItem.cshtml" />
     <Content Include="Views\Administracion\Index.cshtml" />
+    <Content Include="Views\Comges\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Administración\" />
     <Folder Include="Views\App\" />
-    <Folder Include="Views\Comges\" />
     <Folder Include="Views\Logistica\" />
   </ItemGroup>
   <ItemGroup>
