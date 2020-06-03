@@ -87,6 +87,7 @@ namespace CentralDashboard.Controllers
 
             using (ExcelRange rango = ws.Cells["B4:C5"])
             {
+                rango.Style.Fill.PatternType = ExcelFillStyle.Solid;
                 rango.Style.Fill.BackgroundColor.SetColor(azulOscuro);
             }
 
@@ -97,10 +98,14 @@ namespace CentralDashboard.Controllers
                 rango.Style.Fill.BackgroundColor.SetColor(Color.FromArgb(132, 151, 176));
                 rango.Value = mes;
             }
-
+            
             ws.Cells["D5"].Value = "N";
+            ws.Cells["D5"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+            ws.Cells["D5"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             ws.Cells["D5"].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(132, 151, 176));
             ws.Cells["E5"].Value = "%";
+            ws.Cells["E5"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+            ws.Cells["E5"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             ws.Cells["E5"].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(132, 151, 176));
 
 
