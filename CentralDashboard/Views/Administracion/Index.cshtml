@@ -29,6 +29,18 @@
                         <button onclick="reportOption(2)" class="form-control btn btn-success btn-block">CEM Cenabast</button>
                     </div>
                 }
+                @if (ViewBag.ReporteComges)
+                {
+                    <div class="form-group row">
+                        <button onclick="reportOption(3)" class="form-control btn btn-success btn-block">Comges</button>
+                    </div>
+                }
+                @if (ViewBag.ReporteSisq)
+                {
+                    <div class="form-group row">
+                        <button onclick="reportOption(4)" class="form-control btn btn-success btn-block">SISQ UEH</button>
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -111,6 +123,16 @@
                 addCheckbox("Insumo", "Insumo", true, "cbList");
                 $("#btnPrintRPT").data("valor", item);
                 break;
+            case 3:
+                $("#idFormAnio").css("display", "block");
+                $("#idFormMes").css("display", "block");
+                $("#btnPrintRPT").data("valor", item);
+                break;
+            case 4:
+                $("#idFormAnio").css("display", "block");
+                $("#idFormMes").css("display", "block");
+                $("#btnPrintRPT").data("valor", item);
+                break;
         }
         $('#modalFormulario').modal('show');
     }
@@ -131,6 +153,12 @@
                     alert("Año invalido");
                 }
                 break;
+            case 3:
+                getFuenteCemges($("#formSelectMes option:selected").val(), $("#formSelectAnio option:selected").val());
+                break;
+            case 4:
+                getFuenteSISQ($("#formSelectMes option:selected").val(), $("#formSelectAnio option:selected").val());
+                break;
         }
     };
 
@@ -149,6 +177,18 @@
 
     function getCemCenabast(anio, insumo) {
         var url = "/Logistica/CemCenabast/?anio=" + anio + "&insumo=" + insumo;
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
+
+    function getFuenteCemges(mes, anio) {
+        var url = "/Comges/ObtenerReporteComges/?idMes=" + mes + "&anio=" + anio;
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
+
+    function getFuenteSISQ(mes, anio) {
+        var url = "/Comges/ObtenerReporteSisq/?idMes=" + mes + "&anio=" + anio;
         var win = window.open(url, '_blank');
         win.focus();
     }

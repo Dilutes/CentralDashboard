@@ -22,6 +22,8 @@ namespace CentralDashboard.Controllers
             ViewBag.ReporteFuentesRemA08 = bd.USR_PermisoSitioWeb.Any(x => x.Usuario == idUsuario && x.IdPaginaSitioWeb == 2);
             ViewBag.ReporteRemA08 = bd.USR_PermisoSitioWeb.Any(x => x.Usuario == idUsuario && x.IdPaginaSitioWeb == 3);
             ViewBag.ReporteCemCenabast = bd.USR_PermisoSitioWeb.Any(x => x.Usuario == idUsuario && x.IdPaginaSitioWeb == 4);
+            ViewBag.ReporteComges = bd.USR_PermisoSitioWeb.Any(x => x.Usuario == idUsuario && x.IdPaginaSitioWeb == 5);
+            ViewBag.ReporteSisq = bd.USR_PermisoSitioWeb.Any(x => x.Usuario == idUsuario && x.IdPaginaSitioWeb == 6);
             return View();
         }
         [HttpPost]

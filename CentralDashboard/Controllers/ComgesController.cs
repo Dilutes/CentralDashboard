@@ -22,10 +22,56 @@ namespace CentralDashboard.Controllers
             return View();
         }
 
-        public void ObtenerReporteComges(int idMes, string mes, int año)
+        public void ObtenerReporteComges(int idMes, int anio)
         {
-            MemoryStream stream = Comges(idMes, mes, año);
-            string name = "COMGES_Abril_2020.xlsx";
+            string mes = ObtenerMes(idMes);
+            MemoryStream stream = Comges(idMes, mes, anio);
+            string name = "COMGES_Abril_"+ anio + ".xlsx";
+            Response.Clear();
+            Response.AddHeader("content-disposition", "attachment;filename=" + name);
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.BinaryWrite(stream.ToArray());
+            Response.End();
+        }
+
+        private string ObtenerMes(int idMes)
+        {
+            switch (idMes)
+            {
+                case 1:
+                    return "Enero";
+                case 2:
+                    return "Febrero";
+                case 3:
+                    return "Marzo";
+                case 4:
+                    return "Abril";
+                case 5:
+                    return "Mayo";
+                case 6:
+                    return "Junio";
+                case 7:
+                    return "Julio";
+                case 8:
+                    return "Agosto";
+                case 9:
+                    return "Septiembre";
+                case 10:
+                    return "Octubre";
+                case 11:
+                    return "Noviembre";
+                case 12:
+                    return "Diciembre";
+                default:
+                    return "";
+            }
+        }
+
+        public void ObtenerReporteSISQ(int idMes, int anio)
+        {
+            string mes = ObtenerMes(idMes);
+            MemoryStream stream = Sisq_ueh(idMes, mes, anio);
+            string name = "SISQ_UEH_"+ anio + ".xlsx";
             Response.Clear();
             Response.AddHeader("content-disposition", "attachment;filename=" + name);
             Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
