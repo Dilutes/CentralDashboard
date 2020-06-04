@@ -182,15 +182,19 @@
                 break;
             case 3:
                 getFuenteCemges($("#formSelectMes option:selected").val(), $("#formSelectAnio option:selected").val());
+                $("#modalFormulario").modal('hide');
                 break;
             case 4:
                 getFuenteSISQ($("#formSelectMes option:selected").val(), $("#formSelectAnio option:selected").val());
+                $("#modalFormulario").modal('hide');
                 break;
             case 5:
                 getFuenteEsi2($("#formSelectMes option:selected").val(), $("#formSelectAnio option:selected").val());
+                $("#modalFormulario").modal('hide');
                 break;
             case 6:
                 getFuenteEstancia_UEH($("#formSelectMes option:selected").val(), $("#formSelectAnio option:selected").val());
+                $("#modalFormulario").modal('hide');
                 break;
         }
     };
