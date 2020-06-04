@@ -33,6 +33,16 @@ namespace CentralDashboard.Controllers
             Response.End();
         }
 
+        private MemoryStream Sisq_ueh(int idMes, string mes, int año)
+        {
+            var bdEnti = bdBuilder.GetEntiCorporativa();
+            RPT_COMGES_UEH_Result resumen = bdEnti.RPT_COMGES_UEH(idMes, año).FirstOrDefault();
+            List<RPT_COMGES_UEH_base_Result> comges = bdEnti.RPT_COMGES_UEH_base(idMes, año).ToList();
+            DataTable dt = CabeceraComges(BuildDataTable<RPT_COMGES_UEH_base_Result>(comges));
+            dt.TableName = mes;
+            return Sisq_uehDataSetToExcelXlsx(resumen, dt, mes);
+        }
+
         private MemoryStream Comges(int idMes, string mes, int año)
         {
             var bdEnti = bdBuilder.GetEntiCorporativa();
@@ -40,7 +50,7 @@ namespace CentralDashboard.Controllers
             List<RPT_COMGES_UEH_base_Result> comges = bdEnti.RPT_COMGES_UEH_base(idMes, año).ToList();
             DataTable dt = CabeceraComges(BuildDataTable<RPT_COMGES_UEH_base_Result>(comges));
             dt.TableName = mes;
-            return DataSetToExcelXlsx(resumen, dt, mes);
+            return ComgesDataSetToExcelXlsx(resumen, dt, mes);
         }
 
         private DataTable CabeceraComges(DataTable dataTable)
@@ -53,9 +63,11 @@ namespace CentralDashboard.Controllers
             return dataTable;
         }
 
-        private MemoryStream DataSetToExcelXlsx(RPT_COMGES_UEH_Result resumen, DataTable dt, string mes)
+        private MemoryStream ComgesDataSetToExcelXlsx(RPT_COMGES_UEH_Result resumen, DataTable dt, string mes)
         {
             System.Drawing.Color azulOscuro = System.Drawing.Color.FromArgb(34, 43, 53);
+            System.Drawing.Color azulMedio = System.Drawing.Color.FromArgb(68, 84, 106);
+            System.Drawing.Color azulClaro = System.Drawing.Color.FromArgb(217, 225, 242);
 
             MemoryStream result = new MemoryStream();
             ExcelPackage pack = new ExcelPackage();
@@ -142,7 +154,7 @@ namespace CentralDashboard.Controllers
             ws.Cells["B6:B7"].Style.WrapText = true;
             ws.Cells["B6:B7"].Style.Font.Bold = true;
             ws.Cells["B6:B7"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
-            ws.Cells["B6:B7"].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(68, 84, 106));
+            ws.Cells["B6:B7"].Style.Fill.BackgroundColor.SetColor(azulMedio);
             ws.Cells["B6:B7"].Style.Font.Color.SetColor(Color.White);
 
             ws.Cells["C6"].Style.Fill.PatternType = ExcelFillStyle.Solid;
@@ -150,7 +162,7 @@ namespace CentralDashboard.Controllers
             ws.Cells["C6"].Style.WrapText = true;
             ws.Cells["C6"].Style.Font.Bold = true;
             ws.Cells["C6"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
-            ws.Cells["C6"].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(68, 84, 106));
+            ws.Cells["C6"].Style.Fill.BackgroundColor.SetColor(azulMedio);
             ws.Cells["C6"].Style.Font.Color.SetColor(Color.White);
 
             ws.Cells["C7"].Style.Fill.PatternType = ExcelFillStyle.Solid;
@@ -158,13 +170,13 @@ namespace CentralDashboard.Controllers
             ws.Cells["C7"].Style.WrapText = true;
             ws.Cells["C7"].Style.Font.Bold = true;
             ws.Cells["C7"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
-            ws.Cells["C7"].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(68, 84, 106));
+            ws.Cells["C7"].Style.Fill.BackgroundColor.SetColor(azulMedio);
             ws.Cells["C7"].Style.Font.Color.SetColor(Color.White);
 
             ws.Cells["D6"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             ws.Cells["D6"].Value = resumen.total_C2;
             ws.Cells["D6"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Right;
-            ws.Cells["D6"].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(217, 225, 242));
+            ws.Cells["D6"].Style.Fill.BackgroundColor.SetColor(azulClaro);
             ws.Cells["D6"].Style.Font.Color.SetColor(Color.Black);
             ws.Cells["D6"].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
             ws.Cells["D6"].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
@@ -174,7 +186,7 @@ namespace CentralDashboard.Controllers
             ws.Cells["D7"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             ws.Cells["D7"].Value = resumen.menor_a_30;
             ws.Cells["D7"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Right;
-            ws.Cells["D7"].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(217, 225, 242));
+            ws.Cells["D7"].Style.Fill.BackgroundColor.SetColor(azulClaro);
             ws.Cells["D7"].Style.Font.Color.SetColor(Color.Black);
             ws.Cells["D7"].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
             ws.Cells["D7"].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
@@ -188,7 +200,7 @@ namespace CentralDashboard.Controllers
             ws.Cells["E6:E7"].Style.Font.Bold = true;
             ws.Cells["E6:E7"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
             ws.Cells["E6:E7"].Style.VerticalAlignment = OfficeOpenXml.Style.ExcelVerticalAlignment.Center;
-            ws.Cells["E6:E7"].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(217, 225, 242));
+            ws.Cells["E6:E7"].Style.Fill.BackgroundColor.SetColor(azulClaro);
             ws.Cells["E6:E7"].Style.Font.Color.SetColor(Color.Black);
             ws.Cells["E6:E7"].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
             ws.Cells["E6:E7"].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
@@ -215,7 +227,7 @@ namespace CentralDashboard.Controllers
             ws.Cells["A1:J1"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             ws.Cells["A1:J1"].Style.Font.Bold = true;
             ws.Cells["A1:J1"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
-            ws.Cells["A1:J1"].Style.Fill.BackgroundColor.SetColor(Color.FromArgb(34, 43, 53));
+            ws.Cells["A1:J1"].Style.Fill.BackgroundColor.SetColor(azulOscuro);
             ws.Cells["A1:J1"].Style.Font.Color.SetColor(Color.White);
 
             pack.SaveAs(result);
@@ -254,6 +266,138 @@ namespace CentralDashboard.Controllers
                 tbl.Columns.Add(prop.Name, propType);//prop.PropertyType
             }
             return tbl;
+        }
+        
+
+        private MemoryStream Sisq_uehDataSetToExcelXlsx(RPT_COMGES_UEH_Result resumen, DataTable dt, string mes)
+        {
+            System.Drawing.Color azulOscuro = System.Drawing.Color.FromArgb(34, 43, 53);
+            System.Drawing.Color azulMedio = System.Drawing.Color.FromArgb(68, 84, 106);
+            System.Drawing.Color azulClaro = System.Drawing.Color.FromArgb(217, 225, 242);
+
+            MemoryStream result = new MemoryStream();
+            ExcelPackage pack = new ExcelPackage();
+            ExcelWorksheet ws;
+
+            ws = pack.Workbook.Worksheets.Add("a) B.4_1.2");
+            using (ExcelRange rango = ws.Cells["B4:C4"])
+            {
+                rango.Merge = true;
+                rango.Style.Fill.PatternType = ExcelFillStyle.Solid;
+                rango.Value = "Porcentaje de Pacientes Atendidos dentro del estándar en Unidades de Emergencia Hospitalaria (B.4_1.2)";
+                rango.Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Center;
+                rango.Style.Fill.BackgroundColor.SetColor(azulOscuro);
+                rango.Style.Font.Color.SetColor(Color.White);
+                rango.Style.WrapText = true;
+                rango.Style.Font.Bold = true;
+            }
+
+            ws.Cells["B5"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+            ws.Cells["B5"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["B5"].Style.Fill.BackgroundColor.SetColor(azulMedio);
+            ws.Cells["B5"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["B5"].Style.WrapText = true;
+            ws.Cells["B5"].Style.Font.Bold = true;
+
+            ws.Cells["C5"].Value = "Adulto + Pediátrico (no incluye gineco-obstetra y dental)";
+            ws.Cells["C5"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+            ws.Cells["C5"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["C5"].Style.Fill.BackgroundColor.SetColor(azulMedio);
+            ws.Cells["C5"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["C5"].Style.WrapText = true;
+            ws.Cells["C5"].Style.Font.Bold = true;
+
+            ws.Cells["B6"].Value = "Pacientes con estadía <= 6 horas en UEH";
+            ws.Cells["B6"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+            ws.Cells["B6"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["B6"].Style.Fill.BackgroundColor.SetColor(azulOscuro);
+            ws.Cells["B6"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["B6"].Style.WrapText = true;
+            ws.Cells["B6"].Style.Font.Bold = true;
+
+            ws.Cells["B7"].Value = "Total de atenciones";
+            ws.Cells["B7"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+            ws.Cells["B7"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["B7"].Style.Fill.BackgroundColor.SetColor(azulOscuro);
+            ws.Cells["B7"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["B7"].Style.WrapText = true;
+            ws.Cells["B7"].Style.Font.Bold = true;
+
+            ws.Cells["B8"].Value = "% de cumplimiento";
+            ws.Cells["B8"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+            ws.Cells["B8"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["B8"].Style.Fill.BackgroundColor.SetColor(azulOscuro);
+            ws.Cells["B8"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["B8"].Style.WrapText = true;
+            ws.Cells["B8"].Style.Font.Bold = true;
+
+
+            ws.Cells["C5"].Value = "Adulto + Pediátrico (no incluye gineco-obstetra y dental)";
+            ws.Cells["C5"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+            ws.Cells["C5"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["C5"].Style.Fill.BackgroundColor.SetColor(azulMedio);
+            ws.Cells["C5"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["C5"].Style.WrapText = true;
+            ws.Cells["C5"].Style.Font.Bold = true;
+
+            ws.Cells["C6"].Value = resumen.total_C2;
+            ws.Cells["C6"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Right;
+            ws.Cells["C6"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["C6"].Style.Fill.BackgroundColor.SetColor(Color.White);
+            ws.Cells["C6"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["C6"].Style.WrapText = true;
+            ws.Cells["C6"].Style.Font.Bold = true;
+            ws.Cells["C6"].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells["C6"].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells["C6"].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells["C6"].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+
+            ws.Cells["C7"].Value = resumen.total_C2;
+            ws.Cells["C7"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Right;
+            ws.Cells["C7"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["C7"].Style.Fill.BackgroundColor.SetColor(Color.White);
+            ws.Cells["C7"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["C7"].Style.WrapText = true;
+            ws.Cells["C7"].Style.Font.Bold = true;
+            ws.Cells["C7"].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells["C7"].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells["C7"].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells["C7"].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+
+            ws.Cells["C8"].Value = resumen.Porcentaje;
+            ws.Cells["C8"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Right;
+            ws.Cells["C8"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["C8"].Style.Fill.BackgroundColor.SetColor(azulClaro);
+            ws.Cells["C8"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["C8"].Style.WrapText = true;
+            ws.Cells["C8"].Style.Font.Bold = true;
+            ws.Cells["C8"].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells["C8"].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells["C8"].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells["C8"].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+
+            
+            ws = pack.Workbook.Worksheets.Add(dt.TableName);
+            ws.Cells["A1"].LoadFromDataTable(dt, true);
+
+            ws.Cells[ws.Dimension.Address].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells[ws.Dimension.Address].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells[ws.Dimension.Address].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells[ws.Dimension.Address].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells[ws.Dimension.Address].AutoFitColumns();
+            ws.Cells[ws.Dimension.Address].AutoFilter = true;
+
+            ws.Row(1).Height = 46.25;
+
+
+            ws.Cells["A1:G1"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["A1:G1"].Style.Font.Bold = true;
+            ws.Cells["A1:G1"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+            ws.Cells["A1:G1"].Style.Fill.BackgroundColor.SetColor(azulOscuro);
+            ws.Cells["A1:G1"].Style.Font.Color.SetColor(Color.White);
+
+            pack.SaveAs(result);
+            return result;
         }
     }
 }
