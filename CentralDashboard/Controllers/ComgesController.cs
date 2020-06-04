@@ -22,11 +22,35 @@ namespace CentralDashboard.Controllers
             return View();
         }
 
+        public void ObtenerReporteEstancia_UEH(int idMes, int anio)
+        {
+            string mes = ObtenerMes(idMes);
+            MemoryStream stream = Estancia_UEH(idMes, mes, anio);
+            string name = "Estancia_UEH_" + mes + "_" + anio + ".xlsx";
+            Response.Clear();
+            Response.AddHeader("content-disposition", "attachment;filename=" + name);
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.BinaryWrite(stream.ToArray());
+            Response.End();
+        }
+
+        public void ObtenerReporteESI2(int idMes, int anio)
+        {
+            string mes = ObtenerMes(idMes);
+            MemoryStream stream = Esi2(idMes, mes, anio);
+            string name = "ESI2_" + mes + "_" + anio + ".xlsx";
+            Response.Clear();
+            Response.AddHeader("content-disposition", "attachment;filename=" + name);
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.BinaryWrite(stream.ToArray());
+            Response.End();
+        }
+
         public void ObtenerReporteComges(int idMes, int anio)
         {
             string mes = ObtenerMes(idMes);
             MemoryStream stream = Comges(idMes, mes, anio);
-            string name = "COMGES_Abril_"+ anio + ".xlsx";
+            string name = "COMGES_" + mes + "_" + anio + ".xlsx";
             Response.Clear();
             Response.AddHeader("content-disposition", "attachment;filename=" + name);
             Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
@@ -71,12 +95,21 @@ namespace CentralDashboard.Controllers
         {
             string mes = ObtenerMes(idMes);
             MemoryStream stream = Sisq_ueh(idMes, mes, anio);
-            string name = "SISQ_UEH_"+ anio + ".xlsx";
+            string name = "SISQ_UEH_" + mes + "_" + anio + ".xlsx";
             Response.Clear();
             Response.AddHeader("content-disposition", "attachment;filename=" + name);
             Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             Response.BinaryWrite(stream.ToArray());
             Response.End();
+        }
+
+        private MemoryStream Estancia_UEH(int idMes, string mes, int año)
+        {
+            var bdEnti = bdBuilder.GetEntiCorporativa();
+            List<RPT_Estancia_UEH_base_Result> datos = bdEnti.RPT_Estancia_UEH_base(idMes, año).ToList();
+            DataTable dt = CabeceraComges(BuildDataTable<RPT_Estancia_UEH_base_Result>(datos));
+            dt.TableName = mes + " " + año;
+            return Estancia_UEHDataSetToExcelXlsx(dt, mes);
         }
 
         private MemoryStream Sisq_ueh(int idMes, string mes, int año)
@@ -97,6 +130,15 @@ namespace CentralDashboard.Controllers
             DataTable dt = CabeceraComges(BuildDataTable<RPT_COMGES_UEH_base_Result>(comges));
             dt.TableName = mes;
             return ComgesDataSetToExcelXlsx(resumen, dt, mes);
+        }
+
+        private MemoryStream Esi2(int idMes, string mes, int año)
+        {
+            var bdEnti = bdBuilder.GetEntiCorporativa();
+            List<RPT_ESI2_UEH_base_Result> lista = bdEnti.RPT_ESI2_UEH_base(idMes, año).ToList();
+            DataTable dt = CabeceraComges(BuildDataTable<RPT_ESI2_UEH_base_Result>(lista));
+            dt.TableName = mes + "_ESI_2";
+            return ESI2DataSetToExcelXlsx(dt, mes);
         }
 
         private DataTable CabeceraComges(DataTable dataTable)
@@ -313,7 +355,7 @@ namespace CentralDashboard.Controllers
             }
             return tbl;
         }
-        
+
 
         private MemoryStream Sisq_uehDataSetToExcelXlsx(RPT_SISQ_UEH_Result resumen, DataTable dt, string mes)
         {
@@ -434,8 +476,9 @@ namespace CentralDashboard.Controllers
             ws.Cells["C8"].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
             ws.Cells["C8"].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
 
-            
+
             ws = pack.Workbook.Worksheets.Add(dt.TableName);
+            ws.View.ShowGridLines = false;
             ws.Cells["A1"].LoadFromDataTable(dt, true);
 
             ws.Cells[ws.Dimension.Address].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
@@ -453,6 +496,75 @@ namespace CentralDashboard.Controllers
             ws.Cells["A1:G1"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
             ws.Cells["A1:G1"].Style.Fill.BackgroundColor.SetColor(azulOscuro);
             ws.Cells["A1:G1"].Style.Font.Color.SetColor(Color.White);
+
+            pack.SaveAs(result);
+            return result;
+        }
+
+        private MemoryStream ESI2DataSetToExcelXlsx(DataTable dt, string mes)
+        {
+            System.Drawing.Color azulOscuro = System.Drawing.Color.FromArgb(34, 43, 53);
+            System.Drawing.Color azulMedio = System.Drawing.Color.FromArgb(68, 84, 106);
+            System.Drawing.Color azulClaro = System.Drawing.Color.FromArgb(217, 225, 242);
+
+            MemoryStream result = new MemoryStream();
+            ExcelPackage pack = new ExcelPackage();
+            ExcelWorksheet ws;
+
+            ws = pack.Workbook.Worksheets.Add(dt.TableName);
+            //ws.View.ShowGridLines = false;
+            ws.Cells["A1"].LoadFromDataTable(dt, true);
+
+            ws.Cells[ws.Dimension.Address].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells[ws.Dimension.Address].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells[ws.Dimension.Address].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells[ws.Dimension.Address].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells[ws.Dimension.Address].AutoFitColumns();
+            ws.Cells[ws.Dimension.Address].AutoFilter = true;
+
+            ws.Row(1).Height = 46.25;
+
+
+            ws.Cells["A1:M1"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["A1:M1"].Style.Font.Bold = true;
+            ws.Cells["A1:M1"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+            ws.Cells["A1:M1"].Style.Fill.BackgroundColor.SetColor(azulOscuro);
+            ws.Cells["A1:M1"].Style.Font.Color.SetColor(Color.White);
+
+            pack.SaveAs(result);
+            return result;
+        }
+
+
+        private MemoryStream Estancia_UEHDataSetToExcelXlsx(DataTable dt, string mes)
+        {
+            System.Drawing.Color azulOscuro = System.Drawing.Color.FromArgb(34, 43, 53);
+            System.Drawing.Color azulMedio = System.Drawing.Color.FromArgb(68, 84, 106);
+            System.Drawing.Color azulClaro = System.Drawing.Color.FromArgb(217, 225, 242);
+
+            MemoryStream result = new MemoryStream();
+            ExcelPackage pack = new ExcelPackage();
+            ExcelWorksheet ws;
+
+            ws = pack.Workbook.Worksheets.Add(dt.TableName);
+            ws.View.ShowGridLines = false;
+            ws.Cells["A1"].LoadFromDataTable(dt, true);
+
+            ws.Cells[ws.Dimension.Address].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells[ws.Dimension.Address].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells[ws.Dimension.Address].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells[ws.Dimension.Address].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
+            ws.Cells[ws.Dimension.Address].AutoFitColumns();
+            ws.Cells[ws.Dimension.Address].AutoFilter = true;
+
+            ws.Row(1).Height = 46.25;
+
+
+            ws.Cells["A1:L1"].Style.Fill.PatternType = ExcelFillStyle.Solid;
+            ws.Cells["A1:L1"].Style.Font.Bold = true;
+            ws.Cells["A1:L1"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Left;
+            ws.Cells["A1:L1"].Style.Fill.BackgroundColor.SetColor(azulOscuro);
+            ws.Cells["A1:L1"].Style.Font.Color.SetColor(Color.White);
 
             pack.SaveAs(result);
             return result;

@@ -69,6 +69,14 @@
           <Parameter Name="anio" Type="int" Mode="In" />
         </Function>
         <Function Name="RPT_DiarioHospitalizacion" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="RPT_ESI2_UEH_base" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mes" Type="int" Mode="In" />
+          <Parameter Name="anio" Type="int" Mode="In" />
+        </Function>
+        <Function Name="RPT_Estancia_UEH_base" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="mes" Type="int" Mode="In" />
+          <Parameter Name="anio" Type="int" Mode="In" />
+        </Function>
         <Function Name="RPT_SISQ_UEH" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="mes" Type="int" Mode="In" />
           <Parameter Name="anio" Type="int" Mode="In" />
@@ -134,6 +142,14 @@
             <Parameter Name="anio" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="RPT_SISQ_UEH_base" ReturnType="Collection(BD_ENTI_CORPORATIVAModel.RPT_SISQ_UEH_base_Result)">
+            <Parameter Name="mes" Mode="In" Type="Int32" />
+            <Parameter Name="anio" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RPT_ESI2_UEH_base" ReturnType="Collection(BD_ENTI_CORPORATIVAModel.RPT_ESI2_UEH_base_Result)">
+            <Parameter Name="mes" Mode="In" Type="Int32" />
+            <Parameter Name="anio" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="RPT_Estancia_UEH_base" ReturnType="Collection(BD_ENTI_CORPORATIVAModel.RPT_Estancia_UEH_base_Result)">
             <Parameter Name="mes" Mode="In" Type="Int32" />
             <Parameter Name="anio" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -420,6 +436,35 @@
           <Property Type="String" Name="Fecha_y_Hora_de_Alta_Médica" Nullable="true" MaxLength="61" />
           <Property Type="Decimal" Name="Tiempo_subproceso_Atención_Médica" Nullable="true" Precision="17" Scale="6" />
           <Property Type="String" Name="Cumplimiento_Estándar_Nacional" Nullable="false" MaxLength="9" />
+        </ComplexType>
+        <ComplexType Name="RPT_ESI2_UEH_base_Result">
+          <Property Type="Int32" Name="Dia_Admision" Nullable="true" />
+          <Property Type="Int32" Name="Mes_Admision" Nullable="true" />
+          <Property Type="Int32" Name="Año_Admision" Nullable="true" />
+          <Property Type="String" Name="Numero_Formulario" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="82" />
+          <Property Type="String" Name="Rut" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Categorizacion" Nullable="false" MaxLength="5" />
+          <Property Type="String" Name="Hora_Admision" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Fecha_primera_atencion" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Hora_primera_atencion" Nullable="true" MaxLength="30" />
+          <Property Type="Decimal" Name="Tiempo_Admision___Primera_Atencion__min_" Nullable="true" Precision="17" Scale="6" />
+          <Property Type="Int32" Name="Edad" Nullable="false" />
+          <Property Type="String" Name="Tipo_Atencion" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="RPT_Estancia_UEH_base_Result">
+          <Property Type="String" Name="Numero_DAU" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="82" />
+          <Property Type="String" Name="Rut" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="Tipo_Atención" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Categorización" Nullable="false" MaxLength="5" />
+          <Property Type="Int32" Name="Año_Egreso" Nullable="true" />
+          <Property Type="Int32" Name="Mes_Egreso" Nullable="true" />
+          <Property Type="String" Name="Fecha_Hora_Ind__Hospitalización" Nullable="true" MaxLength="61" />
+          <Property Type="String" Name="Fecha_Hora_Egreso_UEH" Nullable="true" MaxLength="61" />
+          <Property Type="Decimal" Name="Tiempo_Boarding" Nullable="true" Precision="17" Scale="6" />
+          <Property Type="Int32" Name="Dias_Estancias_UEH" Nullable="true" />
+          <Property Type="String" Name="Clasificación_Estancia_en_UEH" Nullable="false" MaxLength="19" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -732,6 +777,43 @@
                 <ScalarProperty Name="Fecha_y_Hora_de_Alta_Médica" ColumnName="Fecha y Hora de Alta Médica" />
                 <ScalarProperty Name="Tiempo_subproceso_Atención_Médica" ColumnName="Tiempo subproceso Atención Médica" />
                 <ScalarProperty Name="Cumplimiento_Estándar_Nacional" ColumnName="Cumplimiento Estándar Nacional" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RPT_ESI2_UEH_base" FunctionName="BD_ENTI_CORPORATIVAModel.Store.RPT_ESI2_UEH_base">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_ENTI_CORPORATIVAModel.RPT_ESI2_UEH_base_Result">
+                <ScalarProperty Name="Dia_Admision" ColumnName="Dia Admision" />
+                <ScalarProperty Name="Mes_Admision" ColumnName="Mes Admision" />
+                <ScalarProperty Name="Año_Admision" ColumnName="Año Admision" />
+                <ScalarProperty Name="Numero_Formulario" ColumnName="Numero Formulario" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Rut" ColumnName="Rut" />
+                <ScalarProperty Name="Categorizacion" ColumnName="Categorizacion" />
+                <ScalarProperty Name="Hora_Admision" ColumnName="Hora Admision" />
+                <ScalarProperty Name="Fecha_primera_atencion" ColumnName="Fecha primera atencion" />
+                <ScalarProperty Name="Hora_primera_atencion" ColumnName="Hora primera atencion" />
+                <ScalarProperty Name="Tiempo_Admision___Primera_Atencion__min_" ColumnName="Tiempo Admision - Primera Atencion (min)" />
+                <ScalarProperty Name="Edad" ColumnName="Edad" />
+                <ScalarProperty Name="Tipo_Atencion" ColumnName="Tipo Atencion" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="RPT_Estancia_UEH_base" FunctionName="BD_ENTI_CORPORATIVAModel.Store.RPT_Estancia_UEH_base">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="BD_ENTI_CORPORATIVAModel.RPT_Estancia_UEH_base_Result">
+                <ScalarProperty Name="Numero_DAU" ColumnName="Numero DAU" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="Rut" ColumnName="Rut" />
+                <ScalarProperty Name="Tipo_Atención" ColumnName="Tipo Atención" />
+                <ScalarProperty Name="Categorización" ColumnName="Categorización" />
+                <ScalarProperty Name="Año_Egreso" ColumnName="Año Egreso" />
+                <ScalarProperty Name="Mes_Egreso" ColumnName="Mes Egreso" />
+                <ScalarProperty Name="Fecha_Hora_Ind__Hospitalización" ColumnName="Fecha Hora Ind. Hospitalización" />
+                <ScalarProperty Name="Fecha_Hora_Egreso_UEH" ColumnName="Fecha Hora Egreso UEH" />
+                <ScalarProperty Name="Tiempo_Boarding" ColumnName="Tiempo Boarding" />
+                <ScalarProperty Name="Dias_Estancias_UEH" ColumnName="Dias Estancias UEH" />
+                <ScalarProperty Name="Clasificación_Estancia_en_UEH" ColumnName="Clasificación Estancia en UEH" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

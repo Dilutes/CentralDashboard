@@ -41,6 +41,18 @@
                         <button onclick="reportOption(4)" class="form-control btn btn-success btn-block">SISQ UEH</button>
                     </div>
                 }
+                @if (ViewBag.ReporteEsi2)
+                {
+                    <div class="form-group row">
+                        <button onclick="reportOption(5)" class="form-control btn btn-success btn-block">ESI 2</button>
+                    </div>
+                }
+                @if (ViewBag.ReporteEstancia_UEH)
+                {
+                    <div class="form-group row">
+                        <button onclick="reportOption(6)" class="form-control btn btn-success btn-block">Estancia UEH</button>
+                    </div>
+                }
             </div>
         </div>
     </div>
@@ -79,7 +91,7 @@
                 <div class="opcionFomrulario" id="idFormCheckBox1" style="display: none;">
                     Check
                     <div class="col-md-12" id="cbList">
-                        
+
                     </div>
                 </div>
             </div>
@@ -135,6 +147,19 @@
                 $("#btnPrintRPT").data("valor", item);
                 getAnioREM();
                 break;
+            case 5:
+                $("#idFormAnio").css("display", "block");
+                $("#idFormMes").css("display", "block");
+                $("#btnPrintRPT").data("valor", item);
+                getAnioREM();
+                break;
+            case 6:
+                $("#idFormAnio").css("display", "block");
+                $("#idFormMes").css("display", "block");
+                $("#btnPrintRPT").data("valor", item);
+                getAnioREM();
+                break;
+
         }
         $('#modalFormulario').modal('show');
     }
@@ -161,17 +186,23 @@
             case 4:
                 getFuenteSISQ($("#formSelectMes option:selected").val(), $("#formSelectAnio option:selected").val());
                 break;
+            case 5:
+                getFuenteEsi2($("#formSelectMes option:selected").val(), $("#formSelectAnio option:selected").val());
+                break;
+            case 6:
+                getFuenteEstancia_UEH($("#formSelectMes option:selected").val(), $("#formSelectAnio option:selected").val());
+                break;
         }
     };
 
     //AJAX Llamados a los RPT
-    function getFuenteREMA08(mes , anio) {
+    function getFuenteREMA08(mes, anio) {
         var url = "/Administracion/getFuenteREMA08/?mes=" + mes + "&anio=" + anio;
         var win = window.open(url, '_blank');
         win.focus();
     }
 
-    function getREMA08(mes , anio) {
+    function getREMA08(mes, anio) {
         var url = "/Administracion/getREMA08/?mes=" + mes + "&anio=" + anio;
         var win = window.open(url, '_blank');
         win.focus();
@@ -195,6 +226,17 @@
         win.focus();
     }
 
+    function getFuenteEsi2(mes, anio) {
+        var url = "/Comges/ObtenerReporteESI2/?idMes=" + mes + "&anio=" + anio;
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
+
+    function getFuenteEstancia_UEH(mes, anio) {
+        var url = "/Comges/ObtenerReporteEstancia_UEH/?idMes=" + mes + "&anio=" + anio;
+        var win = window.open(url, '_blank');
+        win.focus();
+    }
 
     //AJAX Modal Formulario
     function getAnioREM() {
@@ -232,7 +274,7 @@
             }
         })
             .done(function () {
-                
+
             })
             .fail(function () {
                 console.log("Error: Obtener mes REM select.");
@@ -242,7 +284,7 @@
     function addCheckbox(id, txt, valor, contenedor) {
         var container = $("#" + contenedor);
 
-        $('<input />', { type: 'checkbox', id: 'cb' + id, value: valor}).appendTo(container);
+        $('<input />', { type: 'checkbox', id: 'cb' + id, value: valor }).appendTo(container);
         $('<label />', { 'for': 'cb' + id, text: txt, class: 'form-check-label' }).appendTo(container);
     }
 </script>

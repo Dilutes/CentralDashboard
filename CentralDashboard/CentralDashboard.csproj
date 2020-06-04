@@ -208,6 +208,12 @@
     <Compile Include="Models\EntiCorporativa\RPT_DiarioHospitalizacion_Result.cs">
       <DependentUpon>ModeloEnti.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntiCorporativa\RPT_ESI2_UEH_base_Result.cs">
+      <DependentUpon>ModeloEnti.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntiCorporativa\RPT_Estancia_UEH_base_Result.cs">
+      <DependentUpon>ModeloEnti.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntiCorporativa\RPT_SISQ_UEH_base_Result.cs">
       <DependentUpon>ModeloEnti.tt</DependentUpon>
     </Compile>
