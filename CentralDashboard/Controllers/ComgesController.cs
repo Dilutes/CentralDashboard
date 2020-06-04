@@ -82,10 +82,10 @@ namespace CentralDashboard.Controllers
         private MemoryStream Sisq_ueh(int idMes, string mes, int año)
         {
             var bdEnti = bdBuilder.GetEntiCorporativa();
-            RPT_COMGES_UEH_Result resumen = bdEnti.RPT_COMGES_UEH(idMes, año).FirstOrDefault();
-            List<RPT_COMGES_UEH_base_Result> comges = bdEnti.RPT_COMGES_UEH_base(idMes, año).ToList();
-            DataTable dt = CabeceraComges(BuildDataTable<RPT_COMGES_UEH_base_Result>(comges));
-            dt.TableName = mes;
+            RPT_SISQ_UEH_Result resumen = bdEnti.RPT_SISQ_UEH(idMes, año).FirstOrDefault();
+            List<RPT_SISQ_UEH_base_Result> datos = bdEnti.RPT_SISQ_UEH_base(idMes, año).ToList();
+            DataTable dt = CabeceraComges(BuildDataTable<RPT_SISQ_UEH_base_Result>(datos));
+            dt.TableName = "b) Datos B.4_1.2";
             return Sisq_uehDataSetToExcelXlsx(resumen, dt, mes);
         }
 
@@ -315,7 +315,7 @@ namespace CentralDashboard.Controllers
         }
         
 
-        private MemoryStream Sisq_uehDataSetToExcelXlsx(RPT_COMGES_UEH_Result resumen, DataTable dt, string mes)
+        private MemoryStream Sisq_uehDataSetToExcelXlsx(RPT_SISQ_UEH_Result resumen, DataTable dt, string mes)
         {
             System.Drawing.Color azulOscuro = System.Drawing.Color.FromArgb(34, 43, 53);
             System.Drawing.Color azulMedio = System.Drawing.Color.FromArgb(68, 84, 106);
@@ -326,6 +326,17 @@ namespace CentralDashboard.Controllers
             ExcelWorksheet ws;
 
             ws = pack.Workbook.Worksheets.Add("a) B.4_1.2");
+
+            ws.View.ShowGridLines = false;
+
+            double correccion = 0.71;
+            ws.Column(1).Width = 10.71 + correccion;
+            ws.Column(2).Width = 36 + correccion;
+            ws.Column(3).Width = 22 + correccion;
+
+            ws.Row(4).Height = 33.75;
+            ws.Row(5).Height = 45;
+
             using (ExcelRange rango = ws.Cells["B4:C4"])
             {
                 rango.Merge = true;
@@ -386,25 +397,25 @@ namespace CentralDashboard.Controllers
             ws.Cells["C5"].Style.WrapText = true;
             ws.Cells["C5"].Style.Font.Bold = true;
 
-            ws.Cells["C6"].Value = resumen.total_C2;
+            ws.Cells["C6"].Value = resumen.menor_a_6H;
             ws.Cells["C6"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Right;
             ws.Cells["C6"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             ws.Cells["C6"].Style.Fill.BackgroundColor.SetColor(Color.White);
-            ws.Cells["C6"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["C6"].Style.Font.Color.SetColor(Color.Black);
             ws.Cells["C6"].Style.WrapText = true;
-            ws.Cells["C6"].Style.Font.Bold = true;
+            //ws.Cells["C6"].Style.Font.Bold = true;
             ws.Cells["C6"].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
             ws.Cells["C6"].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
             ws.Cells["C6"].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
             ws.Cells["C6"].Style.Border.Bottom.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
 
-            ws.Cells["C7"].Value = resumen.total_C2;
+            ws.Cells["C7"].Value = resumen.total;
             ws.Cells["C7"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Right;
             ws.Cells["C7"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             ws.Cells["C7"].Style.Fill.BackgroundColor.SetColor(Color.White);
-            ws.Cells["C7"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["C7"].Style.Font.Color.SetColor(Color.Black);
             ws.Cells["C7"].Style.WrapText = true;
-            ws.Cells["C7"].Style.Font.Bold = true;
+            //ws.Cells["C7"].Style.Font.Bold = true;
             ws.Cells["C7"].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
             ws.Cells["C7"].Style.Border.Left.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
             ws.Cells["C7"].Style.Border.Right.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;
@@ -414,7 +425,8 @@ namespace CentralDashboard.Controllers
             ws.Cells["C8"].Style.HorizontalAlignment = OfficeOpenXml.Style.ExcelHorizontalAlignment.Right;
             ws.Cells["C8"].Style.Fill.PatternType = ExcelFillStyle.Solid;
             ws.Cells["C8"].Style.Fill.BackgroundColor.SetColor(azulClaro);
-            ws.Cells["C8"].Style.Font.Color.SetColor(Color.White);
+            ws.Cells["C8"].Style.Font.Color.SetColor(Color.Black);
+            ws.Cells["C8"].Style.Numberformat.Format = "#0\\.00%";
             ws.Cells["C8"].Style.WrapText = true;
             ws.Cells["C8"].Style.Font.Bold = true;
             ws.Cells["C8"].Style.Border.Top.Style = OfficeOpenXml.Style.ExcelBorderStyle.Thin;

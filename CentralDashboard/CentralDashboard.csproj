@@ -208,6 +208,12 @@
     <Compile Include="Models\EntiCorporativa\RPT_DiarioHospitalizacion_Result.cs">
       <DependentUpon>ModeloEnti.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\EntiCorporativa\RPT_SISQ_UEH_base_Result.cs">
+      <DependentUpon>ModeloEnti.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EntiCorporativa\RPT_SISQ_UEH_Result.cs">
+      <DependentUpon>ModeloEnti.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EntiCorporativa\USR_PaginaSitioWeb.cs">
       <DependentUpon>ModeloEnti.tt</DependentUpon>
     </Compile>
@@ -2084,12 +2090,12 @@
     <Content Include="Views\Reporte\Index.cshtml" />
     <Content Include="Views\Menu\IzquierdaItem.cshtml" />
     <Content Include="Views\Administracion\Index.cshtml" />
-    <Content Include="Views\Comges\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Administración\" />
     <Folder Include="Views\App\" />
+    <Folder Include="Views\Comges\" />
     <Folder Include="Views\Logistica\" />
   </ItemGroup>
   <ItemGroup>

@@ -140,5 +140,31 @@ namespace CentralDashboard.Models.EntiCorporativa
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RPT_COMGES_UEH_base_Result>("RPT_COMGES_UEH_base", mesParameter, anioParameter);
         }
+    
+        public virtual ObjectResult<RPT_SISQ_UEH_Result> RPT_SISQ_UEH(Nullable<int> mes, Nullable<int> anio)
+        {
+            var mesParameter = mes.HasValue ?
+                new ObjectParameter("mes", mes) :
+                new ObjectParameter("mes", typeof(int));
+    
+            var anioParameter = anio.HasValue ?
+                new ObjectParameter("anio", anio) :
+                new ObjectParameter("anio", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RPT_SISQ_UEH_Result>("RPT_SISQ_UEH", mesParameter, anioParameter);
+        }
+    
+        public virtual ObjectResult<RPT_SISQ_UEH_base_Result> RPT_SISQ_UEH_base(Nullable<int> mes, Nullable<int> anio)
+        {
+            var mesParameter = mes.HasValue ?
+                new ObjectParameter("mes", mes) :
+                new ObjectParameter("mes", typeof(int));
+    
+            var anioParameter = anio.HasValue ?
+                new ObjectParameter("anio", anio) :
+                new ObjectParameter("anio", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<RPT_SISQ_UEH_base_Result>("RPT_SISQ_UEH_base", mesParameter, anioParameter);
+        }
     }
 }
